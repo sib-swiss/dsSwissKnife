@@ -1,0 +1,16 @@
+Package: dsSwissKnife
+Type: Package
+Title: DataSHIELD Tools and Utilities - server side
+Version: 0.1.0
+Authors@R:
+    c(person(given = "Iulian",
+             family = "Dragan",
+             role = c("aut", "cre"),
+             email = "iulian_dragan@yahoo.com"))
+Maintainer: Iulian Dragan <iulian_dragan@yahoo.com>
+Description: More DataSHIELD including PCA, Kmeans and others.
+    This is the server package.    
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.0
