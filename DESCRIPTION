@@ -13,4 +13,6 @@ Description: More DataSHIELD including PCA, Kmeans and others.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+AggregateMethods: partCov,
+ partColMeans
 RoxygenNote: 7.0.0
