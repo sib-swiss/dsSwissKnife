@@ -44,3 +44,35 @@
   }
   return(some.thing)
 }
+
+
+.extract <- function (input, start.env = NULL){
+  #modified version of dsBase:::extract
+  #it returns a list of (inputname = object)
+  #works for dataframes embedded in lists
+
+  input <- unlist(input)
+
+  output <- list()
+  for (i in input) {
+
+    inputterms <- unlist(strsplit(i, "\\$", perl = TRUE))
+    if(!is.null(start.env)){
+      inputterms <- inputterms[2:length(inputterms)]
+      inputterms <- inputterms[!is.na(inputterms)]
+      obj <- as.environment(start.env)
+    } else {
+      obj <- parent.frame()
+
+    }
+    for(objname in inputterms){
+      this.env <- as.environment(obj)
+
+      print(this.env)
+      obj <- get(objname, envir = this.env)
+    }
+    output[[i]] <- obj
+  }
+
+  return(output)
+}

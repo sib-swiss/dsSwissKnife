@@ -1,3 +1,4 @@
 export(partColMeans)
 export(partCov)
 export(pcaScores)
+export(partRange)
