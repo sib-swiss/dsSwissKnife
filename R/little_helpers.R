@@ -68,7 +68,7 @@
     for(objname in inputterms){
       this.env <- as.environment(obj)
 
-      print(this.env)
+
       obj <- get(objname, envir = this.env)
     }
     output[[i]] <- obj

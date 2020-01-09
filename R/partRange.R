@@ -13,12 +13,11 @@ partRange <- function(...){
   #Iulian: a modified version of rangeDS from datashield,
   #
   #ex <- .extract(c(...))
-  where <- parent.frame()
-  ex <- do.call(.extract, list(...), envir = where)
+  #where <- parent.frame()
+  ex <- do.call(.extract, list(...), envir = parent.frame())
   # Iulian: add handling of an entire data frame
   sapply(ex, function(x){
     if(is.data.frame(x)){
-      print(str(x))
       output <- sapply(.split.numerics(x)$numerics, .sloppy.range, simplify = FALSE, USE.NAMES = TRUE)
       return(output)
     }
