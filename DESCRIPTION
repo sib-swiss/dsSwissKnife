@@ -15,6 +15,8 @@ Encoding: UTF-8
 LazyData: true
 AggregateMethods: partCov,
  partColMeans,
- partRange
+ partRange,
+ partMean,
+ partSsd
 AssignMethods: pcaScores
 RoxygenNote: 7.0.0
