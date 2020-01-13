@@ -14,7 +14,7 @@ partRange <- function(...){
   #
   #ex <- .extract(c(...))
   #where <- parent.frame()
-  ex <- do.call(.extract, list(...), envir = parent.frame())
+  ex <- do.call(.extract, list(c(...), start.env = NULL), envir = parent.frame())
   # Iulian: add handling of an entire data frame
   sapply(ex, function(x){
     if(is.data.frame(x)){
