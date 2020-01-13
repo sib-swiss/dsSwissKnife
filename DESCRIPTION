@@ -18,5 +18,6 @@ AggregateMethods: partCov,
  partRange,
  partMean,
  partSsd
-AssignMethods: pcaScores
+AssignMethods: pcaScores,
+ subsetByClass
 RoxygenNote: 7.0.0
