@@ -3,7 +3,8 @@ partKde2d <-function(holder = NULL, x,y,bandwidth, lims , npoints = 128){
   holder <- .decode.arg(holder)
 
   if(is.null(holder)){ # no categories
-    real.args <- .extract(c(x,y))
+   # real.args <- .dsbase_extract(c(x,y))
+    real.args <- do.call(.extract, list(c(x,y), start.env = NULL), envir = parent.frame())
     if(length(real.args) == 1){ # plot a column against itself
       real.args[[2]] <- real.args[[1]]
     }

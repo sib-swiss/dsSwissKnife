@@ -98,3 +98,60 @@
   output <- list(holders = output1, elements = output2)
   return(output)
 }
+
+#'
+#' @title returns all objects in all environments
+#' @description helper function for dssSubset and dssPivot
+#' @param start a character the environment name where to start (default .GlobalEnv)
+#' @return  a list of environment names and the respective objects defined in each environment
+#'
+
+.ls.all <- function(start = '.GlobalEnv'){
+  envir <- get(start)
+  objs <- ls(envir, all.names = TRUE)
+  ret <- list()
+  ret[[start]] <- objs
+  more.envs <- names(which(sapply(objs, function(x)is.environment(get(x)))==TRUE))
+  c(ret,sapply(more.envs,function(x) ls(get(x), all.names = TRUE), USE.NAMES = TRUE, simplify = FALSE))
+
+}
+
+#'
+#' @title locks or unlocks bindings in environments
+#' @description helper function for dssSubset and dssPivot
+#' @param what a list of  environments and their respective objects - the output of ls.all above
+#' @param func a function, either lockBinding or unlockBinding
+#'
+
+.lock.unlock <- function(what , func){
+  stopifnot(deparse(substitute(func)) %in% c('lockBinding', 'unlockBinding'))
+  invisible(lapply(names(what), function(x){
+    lapply(what[[x]], function(y){
+      func(y,get(x))
+    })
+  }))
+
+}
+
+#' @title removes objects from the current workspace
+#' @description helper function for dssSubset and dssPivot
+#' @param what a list of  environments and their respective objects - the output of a previous call to ls.all
+#' @param start a character the environment name where to start (default .GlobalEnv)
+#'
+
+
+.cleanup <- function(initial, start = '.GlobalEnv'){
+  objs <- .ls.all(start)
+  new.envs <- setdiff(names(objs), names(initial))
+  Map(function(x){
+    rm(get(x))
+    objs[x] <- NULL
+  }, new.envs)
+  invisible(Map(function(x){
+    new.objs <- setdiff(objs[[x]], initial[[x]])
+    rm(list = new.objs, pos = get(x))
+  }, names(objs)))
+
+}
+
+
