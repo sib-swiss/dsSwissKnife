@@ -17,7 +17,12 @@ AggregateMethods: partCov,
  partColMeans,
  partRange,
  partMean,
- partSsd
+ partSsd,
+ partKde2d,
+ suggestPivotFormula,
+ showInfo,
+ scaleDS
 AssignMethods: pcaScores,
- subsetByClass
+ subsetByClass,
+ widen
 RoxygenNote: 7.0.0
