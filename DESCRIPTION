@@ -24,5 +24,6 @@ AggregateMethods: partCov,
  scaleDS
 AssignMethods: pcaScores,
  subsetByClass,
- widen
+ widen,
+ join
 RoxygenNote: 7.0.0
