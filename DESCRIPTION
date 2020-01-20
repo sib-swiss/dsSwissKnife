@@ -21,7 +21,9 @@ AggregateMethods: partCov,
  partKde2d,
  suggestPivotFormula,
  showInfo,
- scaleDS
+ scaleDS,
+ partialData,
+ coxphDS
 AssignMethods: pcaScores,
  subsetByClass,
  widen,
