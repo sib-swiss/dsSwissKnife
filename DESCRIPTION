@@ -23,9 +23,12 @@ AggregateMethods: partCov,
  showInfo,
  scaleDS,
  partialData,
- coxphDS
+ coxphDS,
+ nlme_lmeDS
 AssignMethods: pcaScores,
  subsetByClass,
  widen,
- join
+ join,
+ addDaysInterval,
+ groupedDataDS
 RoxygenNote: 7.0.0
