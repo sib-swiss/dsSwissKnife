@@ -24,7 +24,8 @@ AggregateMethods: partCov,
  scaleDS,
  partialData,
  coxphDS,
- nlme_lmeDS
+ nlme_lmeDS,
+ colnamesDS
 AssignMethods: pcaScores,
  subsetByClass,
  widen,
