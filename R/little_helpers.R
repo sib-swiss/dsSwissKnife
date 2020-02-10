@@ -155,3 +155,53 @@
 }
 
 
+dsBase_isValidDS <- function (obj) {
+  nfilter <- dsBase_setFilterDS()
+  if (class(obj) == "character" | class(obj) == "integer" |
+      class(obj) == "logical" | class(obj) == "numeric") {
+    if (length(obj) > 0 & length(obj) < nfilter) {
+      return(FALSE)
+    }
+    else {
+      return(TRUE)
+    }
+  }
+  else {
+    if (class(obj) == "factor") {
+      tt <- tabulate(obj)
+      xx <- which(tt > 0 & tt < nfilter)
+      if (length(xx) > 0) {
+        return(FALSE)
+      }
+      else {
+        return(TRUE)
+      }
+    }
+    else {
+      if (class(obj) == "data.frame" | class(obj) == "matrix") {
+        if (dim(obj)[1] > 0 & dim(obj)[1] < nfilter) {
+          return(FALSE)
+        }
+        else {
+          return(TRUE)
+        }
+      }
+      else {
+        return(FALSE)
+      }
+    }
+  }
+}
+
+dsBase_setFilterDS <- function (x = getOption("datashield.privacyLevel", default = 5)) {
+  # from dsBase
+  a <- as.numeric(as.character(x))
+  return(a)
+}
+
+dsBase_numNaDS <- function (xvect){
+  # from dsBase
+  out <- length(which(is.na(xvect)))
+  return(out)
+}
+

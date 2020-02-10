@@ -26,7 +26,8 @@ AggregateMethods: partCov,
  coxphDS,
  nlme_lmeDS,
  colnamesDS,
- snf
+ snf,
+ dimDS
 AssignMethods: pcaScores,
  subsetByClass,
  widen,

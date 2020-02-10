@@ -1,7 +1,7 @@
 partMean <- function(x, na.rm = TRUE){
 
   # must be datashield valid (more than <datashield.privacyLevel> rows):
-  if(!dsBase::isValidDS(x)){
+  if(!dsBase_isValidDS(x)){
     return(NA)
   }
 

@@ -74,7 +74,7 @@ subsetByClass <- function(first.arg, cols, keep.cols = TRUE){
 
   names(ret) <- make.names(names(ret))
   out <- lapply(ret, function(x){
-    if (nrow(x) < dsBase:::setFilterDS()){
+    if (nrow(x) < dsBase_setFilterDS()){
       return(NULL)
     }
     as.data.frame(lapply(x, function(y){ # reset the factor levels

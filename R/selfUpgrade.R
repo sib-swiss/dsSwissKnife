@@ -1,5 +1,5 @@
 #' @export
-selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose = FALSE , repos = ){
+selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose = FALSE ){
   # systemd sometimes goes and deletes the rserv tempdir, we need to recreate it if necessary
   tmp <- tempdir()
   if(!dir.exists(tmp)){

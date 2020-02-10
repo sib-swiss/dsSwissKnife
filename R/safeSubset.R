@@ -47,7 +47,7 @@ safeSubset <- function(df, row.filter = TRUE, col.filter = TRUE){
   # get rid of any sneaky objects that might have been created in the filters as side effects
   .cleanup(safe.objs)
   # basic check:
-  if(!dsBase::isValidDS(ret)){
+  if(!dsBase_isValidDS(ret)){
     ret[] <- NA
   }
   ret

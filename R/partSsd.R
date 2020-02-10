@@ -5,7 +5,7 @@ partSsd <- function (xvect, xpoint ) {
   if(missing(xpoint)){
     xpoint <- mean(xvect, na.rm = TRUE)
   }
-  check <- dsBase::isValidDS(xvect)
+  check <- dsBase_isValidDS(xvect)
   if (check) {
     res <- sum((xvect - xpoint)^2)
     len <- length(xvect)
