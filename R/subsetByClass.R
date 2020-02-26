@@ -2,7 +2,7 @@ subsetByClass <- function(first.arg, cols, keep.cols = TRUE){
   first.arg <- .decode.arg(first.arg)
   cols <- .decode.arg(cols)
 
-  objs <- .dsbase_extract(cols)
+  objs <- .dsBase_extract(cols)
   call_env <- parent.frame()
   categories <- data.frame(Map(function(x, y){
     if(is.na(y)){
@@ -27,7 +27,7 @@ subsetByClass <- function(first.arg, cols, keep.cols = TRUE){
   #    ret
   #    }, simplify = FALSE)
 
-  argobjs <- .dsbase_extract(first.arg)
+  argobjs <- .dsBase_extract(first.arg)
 
   real.args<- Map(function(x, y){
     if(is.na(y)){
@@ -74,7 +74,7 @@ subsetByClass <- function(first.arg, cols, keep.cols = TRUE){
 
   names(ret) <- make.names(names(ret))
   out <- lapply(ret, function(x){
-    if (nrow(x) < dsBase_setFilterDS()){
+    if (nrow(x) < .dsBase_setFilterDS()){
       return(NULL)
     }
     as.data.frame(lapply(x, function(y){ # reset the factor levels

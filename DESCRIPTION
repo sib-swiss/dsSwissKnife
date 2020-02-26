@@ -8,7 +8,7 @@ Authors@R:
              role = c("aut", "cre"),
              email = "iulian_dragan@yahoo.com"))
 Maintainer: Iulian Dragan <iulian_dragan@yahoo.com>
-Description: More DataSHIELD including PCA, Kmeans and others.
+Description: More DataSHIELD methods including PCA, Kmeans and others.
     This is the server package.    
 License: What license is it under?
 Encoding: UTF-8
@@ -27,7 +27,8 @@ AggregateMethods: partCov,
  nlme_lmeDS,
  colnamesDS,
  snf,
- dimDS
+ dimDS,
+ setOptionDS,
 AssignMethods: pcaScores,
  subsetByClass,
  widen,

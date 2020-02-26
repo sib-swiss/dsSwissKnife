@@ -7,7 +7,7 @@ rbindDS <- function(x,y, new.colnames = NULL){
   }
 
   ret <- rbind(x,y)
-  if(!dsBase_isValidDS(ret)){
+  if(!.dsBase_isValidDS(ret)){
     ret <- ret[NA, NA]
   }
   ret

@@ -11,7 +11,7 @@
 partColMeans <- function(x, na.rm = FALSE, collist = NULL){
   
   # must be datashield valid (more than <datashield.privacyLevel> rows):
-  if(!dsBase_isValidDS(x)){
+  if(!.dsBase_isValidDS(x)){
     return(NA)
   }
   # be nice and quiet; if no collist has been provided we return the means of the numeric ones
@@ -19,7 +19,7 @@ partColMeans <- function(x, na.rm = FALSE, collist = NULL){
     collist <- .decode.arg(collist)
   }
   y <- .split.numerics(x, collist)$numerics
-  nas <- apply(y, 2, dsBase_numNaDS)
+  nas <- apply(y, 2, .dsBase_numNADS)
   
   return(list(means = colMeans(y, na.rm = na.rm), nrows = NROW(x), nas = nas, numeric.cols = names(y)))
   

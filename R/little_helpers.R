@@ -78,7 +78,7 @@
 }
 
 
-.dsbase_extract <- function (input){
+.dsBase_extract <- function (input){
   input <- unlist(input)
   output1 <- c()
   output2 <- c()
@@ -155,8 +155,8 @@
 }
 
 
-dsBase_isValidDS <- function (obj) {
-  nfilter <- dsBase_setFilterDS()
+.dsBase_isValidDS <- function (obj) {
+  nfilter <- .dsBase_setFilterDS()
   if (class(obj) == "character" | class(obj) == "integer" |
       class(obj) == "logical" | class(obj) == "numeric") {
     if (length(obj) > 0 & length(obj) < nfilter) {
@@ -193,13 +193,13 @@ dsBase_isValidDS <- function (obj) {
   }
 }
 
-dsBase_setFilterDS <- function (x = getOption("datashield.privacyLevel", default = 5)) {
+.dsBase_setFilterDS <- function (x = getOption("datashield.privacyLevel", default = 5)) {
   # from dsBase
   a <- as.numeric(as.character(x))
   return(a)
 }
 
-dsBase_numNaDS <- function (xvect){
+.dsBase_numNADS <- function (xvect){
   # from dsBase
   out <- length(which(is.na(xvect)))
   return(out)
