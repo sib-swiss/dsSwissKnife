@@ -24,18 +24,24 @@ AggregateMethods: partCov,
  scaleDS,
  partialData,
  coxphDS,
+ clogitDS
  nlme_lmeDS,
  colnamesDS,
  snf,
  dimDS,
  setOptionDS,
  selfUpgrade,
- biocInstall
+ biocInstall,
+ cutDS,
+ isUnique,
+ partialKmeans
 AssignMethods: pcaScores,
  subsetByClass,
  widen,
  join,
  addDaysInterval,
  groupedDataDS,
- deriveColumn
+ deriveColumn,
+ rbindDS,
+ safeSubset
 RoxygenNote: 7.0.0
