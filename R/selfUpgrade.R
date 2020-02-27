@@ -8,11 +8,14 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
   if(!is.null(lib)){
     lib = .decode.arg(lib)
   }
-  x <- list( dsCDISC = capture.output(install.packages('dsSwissKnife', lib = lib, repos=c('https://rhap-fdb01.vital-it.ch/repo', 'http://rhap-fdb01.vital-it.ch/repo', 'https://stat.ethz.ch/CRAN', 'http://stat.ethz.ch/CRAN'),
+  x <- list( dsSwissKnife = capture.output(install.packages('dsSwissKnife', lib = lib, repos=c('https://rhap-fdb01.vital-it.ch/repo', 'http://rhap-fdb01.vital-it.ch/repo', 'https://stat.ethz.ch/CRAN', 'http://stat.ethz.ch/CRAN'),
                                                        method = method), type = c('message')))
   if(!is.null(other.package)){
     x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
                                                           repos=c('https://rhap-fdb01.vital-it.ch/repo', 'http://rhap-fdb01.vital-it.ch/repo', 'https://stat.ethz.ch/CRAN', 'http://stat.ethz.ch/CRAN'), method = method),type = c('message'))
+    if(other.package == 'BiocManager'){
+      BiocManager::install()
+    }
   }
   if(verbose){
     x[['installed']] <- installed.packages()
@@ -21,4 +24,10 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
   }
   return(x)
 
+}
+
+
+biocInstall <- function(...){
+  BiocManager::install(...)
+  return(TRUE)
 }

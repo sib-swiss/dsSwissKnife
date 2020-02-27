@@ -29,6 +29,8 @@ AggregateMethods: partCov,
  snf,
  dimDS,
  setOptionDS,
+ selfUpgrade,
+ biocInstall
 AssignMethods: pcaScores,
  subsetByClass,
  widen,
