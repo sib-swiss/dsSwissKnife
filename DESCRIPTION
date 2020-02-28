@@ -24,7 +24,7 @@ AggregateMethods: partCov,
  scaleDS,
  partialData,
  coxphDS,
- clogitDS
+ clogitDS,
  nlme_lmeDS,
  colnamesDS,
  snf,

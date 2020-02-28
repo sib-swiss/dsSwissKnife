@@ -28,6 +28,5 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
 
 
 biocInstall <- function(...){
-  BiocManager::install(...)
-  return(TRUE)
+  capture.output(BiocManager::install(...), type= c('message'))
 }
