@@ -2,10 +2,9 @@
 partSsd <- function (xvect, xpoint ) {
   xect <- xvect[!is.na(xvect)]
   # if no xpoint we use the local mean
-  if(missing(xpoint)){
+  xpoint <- .decode.arg(xpoint)
+  if(is.null(xpoint)){
     xpoint <- mean(xvect, na.rm = TRUE)
-  } else {
-    xpoint <- .decode.arg(xpoint)
   }
 
   check <- .dsBase_isValidDS(xvect)
