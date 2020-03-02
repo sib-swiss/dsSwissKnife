@@ -4,7 +4,10 @@ partSsd <- function (xvect, xpoint ) {
   # if no xpoint we use the local mean
   if(missing(xpoint)){
     xpoint <- mean(xvect, na.rm = TRUE)
+  } else {
+    xpoint <- .decode.arg(xpoint)
   }
+
   check <- .dsBase_isValidDS(xvect)
   if (check) {
     res <- sum((xvect - xpoint)^2)
