@@ -13,6 +13,7 @@ Description: More DataSHIELD methods including PCA, Kmeans and others.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
+Suggests: nlme, VIM, png
 AggregateMethods: partCov,
  partColMeans,
  partRange,
@@ -33,7 +34,8 @@ AggregateMethods: partCov,
  biocInstall,
  cutDS,
  isUnique,
- partialKmeans
+ partialKmeans,
+ VIMDS2
 AssignMethods: pcaScores,
  subsetByClass,
  widen,
