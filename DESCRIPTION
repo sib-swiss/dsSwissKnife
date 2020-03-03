@@ -35,7 +35,9 @@ AggregateMethods: partCov,
  cutDS,
  isUnique,
  partialKmeans,
- VIMDS2
+ VIMDS2,
+ GRridgeDS2,
+ fullData
 AssignMethods: pcaScores,
  subsetByClass,
  widen,
