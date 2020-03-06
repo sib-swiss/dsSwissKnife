@@ -15,7 +15,8 @@ GRridgeDS2 <- function(func, arglist, newobj){
       for(i in 1:3){
         a[[i]] <- get(a[[i]], envir = myenv)
       }
-      do.call(GRridge::grridge,a)
+      capture.output(ret <- do.call(GRridge::grridge,a))
+      ret
     }
   )
   func <- .decode.arg(func)
