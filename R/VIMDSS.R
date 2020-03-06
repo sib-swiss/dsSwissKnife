@@ -1,4 +1,4 @@
-VIMDS2 <- function(func, arglist, newobj = NULL){
+VIMDSS <- function(func, arglist, newobj = NULL){
   dispatcher <- list(
     kNN = function(...) .kNN(newobj,...),
     aggr = .aggr

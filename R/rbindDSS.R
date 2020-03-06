@@ -1,5 +1,5 @@
 #' @export
-rbindDS <- function(x,y, new.colnames = NULL){
+rbindDSS <- function(x,y, new.colnames = NULL){
   new.colnames <- .decode.arg(new.colnames)
   if (!is.null(new.colnames)){
     colnames(x) <- new.colnames
@@ -7,7 +7,7 @@ rbindDS <- function(x,y, new.colnames = NULL){
   }
 
   ret <- rbind(x,y)
-  if(!.dsBase_isValidDS(ret)){
+  if(!.dsBase_isValidDSS(ret)){
     ret <- ret[NA, NA]
   }
   ret

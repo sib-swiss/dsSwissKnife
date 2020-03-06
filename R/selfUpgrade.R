@@ -28,5 +28,7 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
 
 
 biocInstall <- function(...){
-  capture.output(BiocManager::install(...), type= c('message'))
+  x <- list(...)
+  x[['ask']] <- FALSE
+  capture.output(do.call(BiocManager::install, x), type= c('output', 'message'))
 }

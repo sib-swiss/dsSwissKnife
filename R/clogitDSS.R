@@ -1,5 +1,5 @@
 #' @export
-clogitDS <- function(arglist){
+clogitDSS <- function(arglist){
   # clogit is weird, so the following contorsions are necessary:
   coxph <- survival::coxph
   Surv <- survival::Surv

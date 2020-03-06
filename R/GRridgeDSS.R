@@ -1,4 +1,4 @@
-GRridgeDS2 <- function(func, arglist, newobj){
+GRridgeDSS <- function(func, arglist, newobj){
   myenv <- parent.frame()
   force(myenv)
   dispatcher <- list(

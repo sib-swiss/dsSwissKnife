@@ -1,4 +1,4 @@
-scaleDS <- function(what, center = TRUE, scale = TRUE){
+scaleDSS <- function(what, center = TRUE, scale = TRUE){
   center <- .decode.arg(center)
   scale <- .decode.arg(scale)
   sp <- .split.numerics(what)

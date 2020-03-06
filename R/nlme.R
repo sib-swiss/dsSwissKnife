@@ -1,5 +1,5 @@
 #' @export
-groupedDataDS <- function(arglist){
+groupedDataDSS <- function(arglist){
   arglist <- .decode.arg(arglist)
   arglist$formula <- as.formula(arglist[['formula']])
   arglist$data <- get(arglist[['data']], envir = parent.frame())
@@ -7,7 +7,7 @@ groupedDataDS <- function(arglist){
 }
 
 #' @export
-nlme_lmeDS <- function(arglist){
+nlme_lmeDSS <- function(arglist){
   arglist <- .decode.arg(arglist)
   arglist$fixed <- as.formula(arglist[['fixed']])
   arglist$random <- as.formula(arglist[['random']])

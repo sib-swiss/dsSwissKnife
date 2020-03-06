@@ -1,5 +1,5 @@
 #' @export
-cutDS <- function(arglist){
+cutDSS <- function(arglist){
 
   arglist <- .decode.arg(arglist)
 

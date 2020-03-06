@@ -10,7 +10,7 @@
 partRange <- function(...){
 
 
-  #Iulian: a modified version of rangeDS from datashield,
+  #Iulian: a modified version of rangeDSS from datashield,
   #
   #ex <- .extract(c(...))
   #where <- parent.frame()

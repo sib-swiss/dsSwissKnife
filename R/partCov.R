@@ -38,7 +38,7 @@ partCov <- function(x, means = NULL,  collist = NULL){
     stop("'x' cannot contain NAs")
   }
   # must be datashield valid (more than <datashield.privacyLevel> rows):
-  if(!.dsBase_isValidDS(x)){
+  if(!.dsBase_isValidDSS(x)){
     stop(paste0('only ', nrow(x), ' rows'))
   }
   means <- .decode.arg(means)

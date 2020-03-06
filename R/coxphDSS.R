@@ -1,5 +1,5 @@
 #' @export
-coxphDS <- function(arglist){
+coxphDSS <- function(arglist){
   arglist <- .decode.arg(arglist)
   arglist$formula <- as.formula(arglist[['formula']])
   caller_frame = parent.frame()

@@ -1,5 +1,5 @@
 #' @export
-colnamesDS <- function(df, to.replace = NULL, cols = NULL ){
+colnamesDSS <- function(df, to.replace = NULL, cols = NULL ){
   cols <- .decode.arg(cols)
   to.replace <- .decode.arg(to.replace)
   df_name <- deparse(substitute(df))

@@ -74,7 +74,7 @@ one.level.kde2d <- function(x,y,bandwidth , lims  , npoints = 128){
 #' From package MASS
 
 
-.kde2d <- function(x, y, h, n = 128, lims = unlist(rangeDS2(deparse(substitute(x)), deparse(substitute(y)))) ){
+.kde2d <- function(x, y, h, n = 128, lims = unlist(rangeDSS(deparse(substitute(x)), deparse(substitute(y)))) ){
   nx <- length(x)
   if(length(y) != nx)
     stop("data vectors must be the same length")

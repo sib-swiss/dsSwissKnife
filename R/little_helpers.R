@@ -155,8 +155,8 @@
 }
 
 
-.dsBase_isValidDS <- function (obj) {
-  nfilter <- .dsBase_setFilterDS()
+.dsBase_isValidDSS <- function (obj) {
+  nfilter <- .dsBase_setFilterDSS()
   if (class(obj) == "character" | class(obj) == "integer" |
       class(obj) == "logical" | class(obj) == "numeric") {
     if (length(obj) > 0 & length(obj) < nfilter) {
@@ -193,13 +193,13 @@
   }
 }
 
-.dsBase_setFilterDS <- function (x = getOption("datashield.privacyLevel", default = 5)) {
+.dsBase_setFilterDSS <- function (x = getOption("datashield.privacyLevel", default = 5)) {
   # from dsBase
   a <- as.numeric(as.character(x))
   return(a)
 }
 
-.dsBase_numNADS <- function (xvect){
+.dsBase_numNADSS <- function (xvect){
   # from dsBase
   out <- length(which(is.na(xvect)))
   return(out)
