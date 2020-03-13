@@ -10,7 +10,7 @@
 
 
 safeSubset <- function(df, row.filter = TRUE, col.filter = TRUE){
-
+  myenv <- parent.frame()
   stopifnot(is.data.frame(df))
   row.filter <- .decode.arg(row.filter)
   col.filter <- .decode.arg(col.filter)
@@ -26,7 +26,7 @@ safeSubset <- function(df, row.filter = TRUE, col.filter = TRUE){
     #removing this restriction for now:
     #mycols <- setdiff(colnames(df), hidden)
     #ret <-  df[eval(parse(text = row.filter), envir = df[,mycols], enclos = .GlobalEnv), eval(parse(text = col.filter), envir = df[,mycols], enclos = .GlobalEnv), drop = FALSE]
-    ret <-  df[eval(parse(text = row.filter), envir = df, enclos = .GlobalEnv), eval(parse(text = col.filter), envir = df, enclos = .GlobalEnv), drop = FALSE]
+    ret <-  df[eval(parse(text = row.filter), envir = df, enclos = myenv), eval(parse(text = col.filter), envir = df, enclos = myenv), drop = FALSE]
     # reform the factors with the new levels:
     ret <- as.data.frame(lapply(ret, function(x){
       if (class(x) == 'factor'){

@@ -37,7 +37,8 @@ AggregateMethods: partCov,
  partialKmeans,
  VIMDSS,
  GRridgeDSS,
- fullData
+ fullData,
+ forestDSS
 AssignMethods: pcaScores,
  subsetByClass,
  widen,
