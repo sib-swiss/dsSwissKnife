@@ -1,5 +1,5 @@
 #' @export
-join <- function(what, type='full', bycol = NULL){
+joinDSS <- function(what, type='full', bycol = NULL){
 
   bycol <- .decode.arg(bycol)
   if(is.null(bycol)){

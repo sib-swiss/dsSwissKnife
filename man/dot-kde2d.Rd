@@ -10,7 +10,7 @@ From package MASS}
   y,
   h,
   n = 128,
-  lims = unlist(rangeDS2(deparse(substitute(x)), deparse(substitute(y))))
+  lims = unlist(rangeDSS(deparse(substitute(x)), deparse(substitute(y))))
 )
 }
 \description{

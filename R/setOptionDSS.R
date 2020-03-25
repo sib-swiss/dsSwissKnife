@@ -4,3 +4,11 @@ setOptionDSS<- function(opts){
   options(opts)
   return(TRUE)
 }
+
+getOptionDSS <- function(opts = NULL){
+  opts <- .decode.arg(opts)
+  if(is.null(opts)){
+    return(options())
+  }
+  sapply(opts, options, USE.NAMES = FALSE)
+}

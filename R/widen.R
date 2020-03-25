@@ -19,7 +19,7 @@ suggestPivotFormula <- function(what, cols = NULL ,  by.col = NULL){
   by.col <- .decode.arg(by.col)
   cols <- .decode.arg(cols)
   if (is.null(by.col)){
-    tryCatch(by.col <- get('by.col', envir = .mycache), error = function(e){stop('Run init first')})
+    tryCatch(by.col <- get('by.col', envir = .mycache), error = function(e){stop("by.col is not specified and there's no default value")})
   }
 
 
@@ -64,7 +64,7 @@ suggestPivotFormula <- function(what, cols = NULL ,  by.col = NULL){
 #' @export
 #'
 
-widen <- function(what, measure, cols = NULL, formula = NULL,  by.col = NULL, completeCases = FALSE , fun.aggregate = NULL){
+widenDSS <- function(what, measure, cols = NULL, formula = NULL,  by.col = NULL, completeCases = FALSE , fun.aggregate = NULL){
   by.col <- .decode.arg(by.col)
   if(is.null(by.col)){
     tryCatch(by.col <- get('by.col', envir = .mycache), error = function(e){stop('Run init first')})

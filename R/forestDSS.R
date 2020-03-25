@@ -40,7 +40,7 @@ forestDSS <- function(df, dep_var, expl_vars, nodesize = 5, ...) {
   return(forest)
 }
 
-#'
+#' @title: Remove potentially disclosive information
 #' @description: De-identify a randomForest object, and at the same time
 #'   make the ouptut lighter to send to the client.
 #'

@@ -1,7 +1,7 @@
 
 
 
-snf <- function(fn, objs, further.args, action = 'keep', keep.name=NULL){
+snfDSS <- function(fn, objs, further.args, action = 'keep', keep.name=NULL){
 
   action <- .decode.arg(action)
   #check what we are allowed to execute
@@ -61,6 +61,6 @@ snf <- function(fn, objs, further.args, action = 'keep', keep.name=NULL){
 }
 
 
-t <- function(x){
+tDSS <- function(x){
   base::t(x)
 }

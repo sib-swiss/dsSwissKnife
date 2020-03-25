@@ -1,12 +1,19 @@
-
+#' @title  Initialize the environment
+#' @description  Set a number of defaults for some of the functions.
+#' These are: 1) hidden.fields - fields that must show no information (patient identifiers for instance)
+#' 2) allowed.funcs - supplementary functions allowed in dssDeriveColumn (see the documetation for that function)
+#' 3) join.pivot.col - the default column to join (or pivot) by. In the absence of this default
+#' the 'by.col' argument in dssJoin and dssPivot becomes mandatory
 .init <- function(){
   .mycache <<- new.env(parent=.GlobalEnv)
-  #hardcode for now the name of the hidden column(s):
-  hidden <- getOption('hidden.fields')
   assign('hidden', getOption('hidden.fields'), envir = .mycache)
-  #allowed.funcs <- c('abs', 'round', 'ceiling', 'floor', 'signif', 'length')
+  allowed.funcs <- c('abs', 'round', 'ceiling', 'floor', 'signif', 'length', getOption('allowed.functions'))
   #ign('allowed.funcs', allowed.funcs, envir = .mycache)
-  assign('allowed.funcs', getOption('allowed.functions'), envir = .mycache)
+  assign('allowed.funcs', allowed.funcs, envir = .mycache)
+  if(!is.null(getOption('join.pivot.col'))){
+    assign('by.col', getOption('join.pivot.col'), envir = .mycache)
+  }
+  options(stringsAsFactors = TRUE)
 }
 
 
