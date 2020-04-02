@@ -6,11 +6,11 @@ Authors@R:
     c(person(given = "Iulian",
              family = "Dragan",
              role = c("aut", "cre"),
-             email = "iulian_dragan@yahoo.com"))
-Maintainer: Iulian Dragan <iulian_dragan@yahoo.com>
+             email = "iulian.dragan@sib.swiss"))
+Maintainer: Iulian Dragan <iulian.dragan@sib.swiss>
 Description: More DataSHIELD methods including PCA, Kmeans and others.
     This is the server package.    
-License: What license is it under?
+License: 
 Encoding: UTF-8
 LazyData: true
 Suggests: nlme, VIM, png

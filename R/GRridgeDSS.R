@@ -16,6 +16,10 @@ GRridgeDSS <- function(func, arglist, newobj){
         a[[i]] <- get(a[[i]], envir = myenv)
       }
       capture.output(ret <- do.call(GRridge::grridge,a))
+      # sanitize:
+      ret[['predobj']][['NoGroups']][['residuals']] <- NULL
+      ret[['predobj']][['GroupRegul']][['residuals']] <- NULL
+      ret[['arguments']][['partitions']] <- NULL
       ret
     }
   )
