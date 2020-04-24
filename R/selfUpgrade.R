@@ -29,6 +29,7 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
 
 biocInstall <- function(...){
   x <- list(...)
+  x[['site_repository']] <- c('https://stat.ethz.ch/CRAN')
   x[['ask']] <- FALSE
-  capture.output(do.call(BiocManager::install, x), type= c('output', 'message'))
+  capture.output(do.call(BiocManager::install, x), type= c('message'))
 }
