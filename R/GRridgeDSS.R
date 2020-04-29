@@ -17,8 +17,8 @@ GRridgeDSS <- function(func, arglist, newobj){
       }
       capture.output(ret <- do.call(GRridge::grridge,a))
       # sanitize:
-      ret[['predobj']][['NoGroups']][['residuals']] <- NULL
-      ret[['predobj']][['GroupRegul']][['residuals']] <- NULL
+      ret[['predobj']][['NoGroups']]@residuals<- c('censored')
+     ret[['predobj']][['GroupRegul']]@residuals <-c('censored')
       ret[['arguments']][['partitions']] <- NULL
       ret
     }

@@ -39,7 +39,8 @@ AggregateMethods: partCov,
  VIMDSS,
  GRridgeDSS,
  fullData,
- forestDSS
+ forestDSS,
+ synthpopDSS
 AssignMethods: pcaScores,
  subsetByClass,
  widenDSS,
