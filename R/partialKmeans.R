@@ -38,8 +38,11 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
       .shortest_distance(x, centers)$index
     }))
     #set attribute to allow download
+    if(.not.enough.members(cluster.membership)){
+      return(FALSE)
+    }
     attr(cluster.membership, 'download_allowed') <- TRUE
-    #create a vector with cluster membership
+    #create a downloadable vector with cluster membership
 
     assign(paste0(whatname,'_', km.name), cluster.membership, envir = parent.frame())
 
@@ -89,4 +92,10 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
   yy <- xx[rownames(centers),setdiff(colnames(xx), rownames(centers))]^2
   ind <- which.min(yy)
   list(index = ind, value = yy[ind])
+}
+
+.not.enough.members <- function(x){
+  thresh <- .dsBase_setFilterDSS()
+  counts <- table(x)
+  return(any(counts <= thresh))
 }

@@ -18,6 +18,7 @@ synthpopDSS <- function(data, arglist, newobj = NULL){
   if(length(sm) > 0){
     arglist[['smoothing']] <- sm
   }
+  arglist[['print.flag']] = FALSE
   do.call(synthpop::syn, arglist)
 }
 
