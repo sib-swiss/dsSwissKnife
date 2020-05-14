@@ -8,14 +8,16 @@
 }
 \description{
 Set a number of defaults for some of the functions.
-These are: 1) hidden.fields - fields that must show no information (patient identifiers for instance)
+These are:
+
+1) hidden.fields - fields that must show no information (patient identifiers for instance)
 
 2) allowed.functions - supplementary functions allowed in dssDeriveColumn (see the documetation for that function)
 
 3) join.pivot.col - the default column to join (or pivot) by. In the absence of this default
 the 'by.col' argument in dssJoin and dssPivot becomes mandatory
 
-In order to set/modify any of these options the note administrator must create an .Rprofile file
+In order to set/modify any of these options the node administrator must create an .Rprofile file
 in the rserver conf directory (normally /var/lib/rserver/conf) and populate it with the necessary
 R commands to set the above options (see example). Then the foloowing line must be added to the file
 /var/lib/rserver/conf/Rserv.conf:
