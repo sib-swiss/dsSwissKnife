@@ -25,7 +25,6 @@ R commands to set the above options (see example). Then the following line must 
 source /var/lib/rserver/conf/.Rprofile
 }
 \examples{
-:
 # content of the /var/lib/rserver/conf/.Rprofile file that adds as.POSIXct among
 # the allowed functions in dssDeriveColumn:
 options(allowed.functions='as.POSIXct')

@@ -16,7 +16,7 @@
 #'
 #' source /var/lib/rserver/conf/.Rprofile
 #
-#'@examples:
+#'@examples
 #' # content of the /var/lib/rserver/conf/.Rprofile file that adds as.POSIXct among
 #' # the allowed functions in dssDeriveColumn:
 #' options(allowed.functions='as.POSIXct')

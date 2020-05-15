@@ -19,6 +19,12 @@ synthpopDSS <- function(data, arglist, newobj = NULL){
     arglist[['smoothing']] <- sm
   }
   arglist[['print.flag']] = FALSE
+  # more sanitizing, the drop. args are essential, otherwise it returns the actual data:
+  arglist[['drop.not.used']] <- TRUE
+  arglist [['drop.pred.only']] <- TRUE
+  # models is risky to I think:
+  arglist[['models']] <- FALSE
+  arglist[['tab.strataobs']] <- FALSE
   do.call(synthpop::syn, arglist)
 }
 
