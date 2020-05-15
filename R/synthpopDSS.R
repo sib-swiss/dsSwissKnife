@@ -24,7 +24,7 @@ synthpopDSS <- function(data, arglist, newobj = NULL){
   arglist [['drop.pred.only']] <- TRUE
   # models is risky to I think:
   arglist[['models']] <- FALSE
-  arglist[['tab.strataobs']] <- FALSE
+  arglist[['strata']] <- NULL
   do.call(synthpop::syn, arglist)
 }
 
