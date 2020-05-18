@@ -67,7 +67,7 @@ suggestPivotFormula <- function(what, cols = NULL ,  by.col = NULL){
 widenDSS <- function(what, measure, cols = NULL, formula = NULL,  by.col = NULL, completeCases = FALSE , fun.aggregate = NULL){
   by.col <- .decode.arg(by.col)
   if(is.null(by.col)){
-    tryCatch(by.col <- get('by.col', envir = .mycache), error = function(e){stop('Run init first')})
+    tryCatch(by.col <- get('by.col', envir = .mycache), error = function(e){stop('There is no default value for by.col - it must be specified in the function call.')})
   }
   # add the df name into column names to avoid confusion later
   # also make "what" a dataframe if necessary
