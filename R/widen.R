@@ -31,7 +31,7 @@ suggestPivotFormula <- function(what, cols = NULL ,  by.col = NULL){
   cols <- cols[!(cols == by.col)]
 
   # dplyr magic; get the total counts and the counts by by.col
-  grp <- dplyr::group_by_(what, by.col)
+  grp <- dplyr::group_by(what, .data[[by.col]])
   distinct.counts <-as.data.frame(dplyr::summarise_all(what[, cols], .n_distinct.no.na))
   grouped.counts <- as.data.frame(Map(max, dplyr::summarise_all(grp[,c(by.col,cols)],.n_distinct.no.na)[cols]))
 
