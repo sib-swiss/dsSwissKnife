@@ -1,7 +1,7 @@
 subsetByClass <- function(first.arg, cols, keep.cols = TRUE){
   first.arg <- .decode.arg(first.arg)
   cols <- .decode.arg(cols)
-
+  keep.cols <- .decode.arg(keep.cols)
   objs <- .dsBase_extract(cols)
   call_env <- parent.frame()
   categories <- data.frame(Map(function(x, y){
