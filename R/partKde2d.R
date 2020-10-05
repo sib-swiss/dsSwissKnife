@@ -60,9 +60,9 @@ one.level.kde2d <- function(x,y,bandwidth , lims  , npoints = 128){
   if(is.na(h) | h<=epsilon){
     h <- epsilon
   }
-  v <- max(v, tot$var)
+  v <- max(0, v, tot$var, na.rm = TRUE)
   if(v<=0){
-    stop('variance is 0, proceeding would disclose individual data')
+    stop('variance is 0, proceeding would disclose individual data', call. = FALSE)
   }
   l <- max(l, tot$len)
   out <- 4 * 1.06 * min(sqrt(v), h) * l ^ (-1/5)
@@ -91,7 +91,7 @@ one.level.kde2d <- function(x,y,bandwidth , lims  , npoints = 128){
   gy <- seq.int(lims[3L], lims[4L], length.out = n[2L])
   h <- rep(h, length.out = 2L)
   if (any(h <= 0))
-    stop("bandwidths must be strictly positive")
+    stop("bandwidths must be strictly positive", call. = FALSE)
   h <- h/4                            # for S's bandwidth scale
   ax <- outer(gx, x, "-" )/h[1L]
   ay <- outer(gy, y, "-" )/h[2L]

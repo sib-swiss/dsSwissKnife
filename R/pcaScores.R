@@ -29,6 +29,7 @@ pcaScores <- function(x, rotation, center = TRUE, scale = FALSE, na.rm = FALSE, 
 
   if(scale){
     sds <- .decode.arg(sds)
+
     if(is.null(sds)){
       sds <- apply(z,2, function(x) sd(z, na.rm=TRUE) )
     }

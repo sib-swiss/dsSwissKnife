@@ -16,5 +16,5 @@ partSsd <- function (xvect, xpoint ) {
     res <- NA
     len <- NA
   }
-  return(list(ssd = res, len = len ))
+  return(list(ssd = res, len = len))
 }

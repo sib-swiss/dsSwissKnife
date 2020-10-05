@@ -20,7 +20,9 @@ partCov <- function(x, means = NULL,  collist = NULL){
   # the client will sum these and divide by the respective, global, N-1
   # the client ends up with a global covariance matrix
 
-  if (is.data.frame(x)){
+
+
+    if (is.data.frame(x)){
 
     if(!is.null(collist)){
       collist <- .decode.arg(collist)
@@ -31,11 +33,11 @@ partCov <- function(x, means = NULL,  collist = NULL){
   } else if(is.matrix(x)) {
     z <- x
   } else {
-    stop("'x' must be a matrix or a data frame")
+    stop("'x' must be a matrix or a data frame",call. = FALSE)
   }
   # no NAs
   if(anyNA(z)){
-    stop("'x' cannot contain NAs")
+    stop("'x' cannot contain NAs", call. = FALSE)
   }
   # must be datashield valid (more than <datashield.privacyLevel> rows):
   if(!.dsBase_isValidDSS(x)){
@@ -49,7 +51,7 @@ partCov <- function(x, means = NULL,  collist = NULL){
   }
 
   if (length(means) != ncol(z)){
-    stop("length of the means vector must equal the number of columns in 'x'")
+    stop("length of the means vector must equal the number of columns in 'x'", call. = FALSE)
   }
 
   # subtract the means (we know from above that the dimensions match):
