@@ -31,6 +31,7 @@
   if(!is.null(getOption('join.pivot.col'))){
     assign('by.col', getOption('join.pivot.col'), envir = .mycache)
   }
+  #test gitd
 }
 
 
