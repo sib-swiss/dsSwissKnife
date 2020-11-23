@@ -54,5 +54,6 @@ AssignMethods: pcaScores,
  safeSubset,
  scaleDSS,
  tDSS,
- asDSS
+ asDSS,
+ makeFactorsDSS
 RoxygenNote: 7.1.1
