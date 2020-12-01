@@ -5,7 +5,7 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
   if(!exists('mems', where = .GlobalEnv)){
       assign('mems', list(), envir = .GlobalEnv)
   }
-  mems <- c(mems, .get_memory_usage())
+  assign('mems', c(mems, .get_memory_usage()), envir = .GlobalEnv)
   save(mems, file = 'mem.rda')
   centers <- .decode.arg(centers)
   what <- get(whatname, envir = parent.frame())
