@@ -2,7 +2,7 @@
 #' @export
 #'
 partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, split = FALSE, iter.max = NULL,  nstart = NULL, algorithm = 'Forgy'){
-  warning(.get_memory_usage())
+  write.csv(.get_memory_usage(), file = 'mem.csv', append = TRUE, row.names = FALSE)
   centers <- .decode.arg(centers)
   what <- get(whatname, envir = parent.frame())
   allowed <- setdiff(colnames(what), get('hidden', envir = .mycache))
