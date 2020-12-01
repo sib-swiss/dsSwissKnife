@@ -232,7 +232,7 @@
 
 .get_memory_usage <- function(envir = .GlobalEnv){
   objnames <- ls(envir = envir, all.names = TRUE)
-as.data.frame(sapply(objnames, function(x){
+  sapply(objnames, function(x){
     thisobj <- get(x, envir = envir)
     out <- c()
     if(class(thisobj) == 'environment'){
@@ -241,7 +241,7 @@ as.data.frame(sapply(objnames, function(x){
       out <- as.numeric(object.size(thisobj))
     }
     out
-  }, simplify = FALSE))
+  }, simplify = TRUE)
 }
 
 
