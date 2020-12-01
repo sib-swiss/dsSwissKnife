@@ -2,7 +2,10 @@
 #' @export
 #'
 partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, split = FALSE, iter.max = NULL,  nstart = NULL, algorithm = 'Forgy'){
-  write.csv(.get_memory_usage(), file = 'mem.csv', append = TRUE, row.names = FALSE)
+  if(!exists('mems', where = .GlobalEnv)){
+      assign('mems', list(), envir = .GlobalEnv)
+  }
+  append(mems, .get_memory_usage())
   centers <- .decode.arg(centers)
   what <- get(whatname, envir = parent.frame())
   allowed <- setdiff(colnames(what), get('hidden', envir = .mycache))
@@ -24,6 +27,7 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
     return(km)
   }
   if(membership) {
+    save(mems, file = 'mem.rda')
     centers <- as.matrix(centers)
     km.name <- paste0('km_clust', nrow(centers))
     #    cluster.membership <-  factor(apply(what, 1, function(x){
