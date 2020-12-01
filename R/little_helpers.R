@@ -230,3 +230,19 @@
   return(out)
 }
 
+.get_memory_usage <- function(envir = .GlobalEnv){
+  objnames <- ls(envir = envir, all.names = TRUE)
+  sapply(objnames, function(x){
+    thisobj <- get(x, envir = envir)
+    out <- c()
+    if(class(thisobj) == 'environment'){
+      out <- unlist(.get_memory_usage(thisobj))
+    } else {
+      out <- object.size(thisobj)
+    }
+    out
+  })
+}
+
+
+
