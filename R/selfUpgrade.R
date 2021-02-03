@@ -13,10 +13,10 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
   if(!is.null(other.package)){
     x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
                                                           repos=c('https://rhap-fdb01.vital-it.ch/repo', 'http://rhap-fdb01.vital-it.ch/repo', 'https://stat.ethz.ch/CRAN', 'http://stat.ethz.ch/CRAN'), method = method),type = c('message'))
-    if(other.package == 'BiocManager'){
+    if('BiocManager' %in% other.package){
       BiocManager::install(ask = FALSE)
     }
-    if(other.package == 'tensorflow'){
+    if('tensorflow' %in% other.package){
       reticulate::install_miniconda()
       tensorflow::install_tensorflow(method='conda')
     }
