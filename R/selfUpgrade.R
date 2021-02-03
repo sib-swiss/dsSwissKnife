@@ -16,6 +16,10 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
     if(other.package == 'BiocManager'){
       BiocManager::install(ask = FALSE)
     }
+    if(other.package == 'tensorflow'){
+      reticulate::install_miniconda()
+      tensorflow::install_tensorflow(method='conda')
+    }
   }
   if(verbose){
     x[['installed']] <- installed.packages()
