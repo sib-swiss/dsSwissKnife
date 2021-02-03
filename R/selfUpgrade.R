@@ -26,7 +26,7 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
     x[['libs']] <- .libPaths()
     x[['mem']] <-tryCatch(system('free -m', intern = TRUE),
                           error = function(e){
-                               tryCatch(system('free -m', intern = TRUE),
+                               tryCatch(system('cat /proc/meminfo  | grep MemFree', intern = TRUE),
                                         error = function(f) paste0(e, ' - ', f) )
                         })
   }
