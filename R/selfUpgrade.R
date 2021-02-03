@@ -24,7 +24,7 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
   if(verbose){
     x[['installed']] <- installed.packages()
     x[['libs']] <- .libPaths()
-    x[['mem']] <- system('free -m', intern = TRUE)
+    x[['mem']] <-tryCatch(system('free -m', intern = TRUE), error = function(e) e$message)
   }
   return(x)
 
