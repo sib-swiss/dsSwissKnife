@@ -23,7 +23,7 @@ tfNNFit <- function(x, model, cl.labels, compile.args, fit.args, weights.args = 
   }
 
   compile.args <- c(list(model), compile.args)
-  compile.args$optimizer <- keras::optimizer_rmsprop()
+  compile.args$optimizer <- do.call (.makeOptimizer,as.list(compile.args$optimizer))
   do.call(keras::compile, compile.args)
 
   if (!is.null(weights.args)) {
@@ -44,5 +44,19 @@ tfNNFit <- function(x, model, cl.labels, compile.args, fit.args, weights.args = 
   weights <- get_weights(model)
 
   return(weights)
+
+}
+
+# Iulian:
+# create an optmizerfrom a list of the form
+# list(opmtimizerName = '...',  opmtimizerArgs = list(...))
+
+.makeOptimizer <- function(optimizerName, optimizerArgs = list()){
+  library(keras)
+  myOptimizer <- ls.str('package:keras', pattern = optimizerName)
+  if(length(myOptimizer) == 0){
+    stop(paste0('No such compile optimizer: ', optimizerName))
+  }
+  do.call(myOptimizer, optimizerArgs)
 
 }

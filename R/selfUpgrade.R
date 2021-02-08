@@ -18,7 +18,7 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
     }
     if('tensorflow' %in% other.package){
       reticulate::install_miniconda()
-      tensorflow::install_tensorflow(method='conda')
+      tensorflow::install_tensorflow(method='conda', version='cpu')
     }
   }
   if(verbose){
