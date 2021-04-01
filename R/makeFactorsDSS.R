@@ -1,9 +1,10 @@
 makeFactorsDSS <- function(df){
-  as.data.frame(sapply(df, function(y){
-    if(length(intersect(class(y) , c('character', 'Date', 'POSIXct', 'POSIXlt', 'POSIXt'))) >0 ){
-      return(factor(y))
+  hidden <- get('hidden', envir = .mycache)
+  as.data.frame(sapply(colnames(df), function(y){
+    if(length(intersect(class(df[,y]) , c('character', 'Date', 'POSIXct', 'POSIXlt', 'POSIXt'))) >0  && !(y %in% hidden)){
+      return(factor(df[,y]))
     } else {
-      return(y)
+      return(df[,y])
     }
-  },simplify = FALSE))
+  },simplify = FALSE), stringsAsFactors = FALSE)
 }
