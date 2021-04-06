@@ -12,7 +12,7 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
                                                        method = method), type = c('message')))
   if(!is.null(other.package)){
     x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
-                                                          repos=c('https://rhap-fdb01.vital-it.ch/repo', 'http://rhap-fdb01.vital-it.ch/repo', 'https://stat.ethz.ch/CRAN', 'http://stat.ethz.ch/CRAN'), method = method),type = c('message'))
+                                                          repos=c('https://rhap-fdb01.vital-it.ch/repo', 'http://rhap-fdb01.vital-it.ch/repo', 'https://stat.ethz.ch/CRAN', 'http://stat.ethz.ch/CRAN', 'https://cran.obiba.org'), method = method),type = c('message'))
     if('BiocManager' %in% other.package){
       BiocManager::install(ask = FALSE)
     }
