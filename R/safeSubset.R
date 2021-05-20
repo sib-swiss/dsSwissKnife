@@ -27,6 +27,8 @@ safeSubset <- function(df, row.filter = TRUE, col.filter = TRUE){
     #mycols <- setdiff(colnames(df), hidden)
     #ret <-  df[eval(parse(text = row.filter), envir = df[,mycols], enclos = .GlobalEnv), eval(parse(text = col.filter), envir = df[,mycols], enclos = .GlobalEnv), drop = FALSE]
     ret <-  df[eval(parse(text = row.filter), envir = df, enclos = myenv), eval(parse(text = col.filter), envir = df, enclos = myenv), drop = FALSE]
+    # keep the rownames:
+    rown <- row.names(ret)
     # reform the factors with the new levels:
     ret <- as.data.frame(lapply(ret, function(x){
       if (class(x) == 'factor'){
@@ -50,6 +52,8 @@ safeSubset <- function(df, row.filter = TRUE, col.filter = TRUE){
   if(!.dsBase_isValidDSS(ret)){
     ret[] <- NA
   }
+  #set the original rownames
+  row.names(ret) <- rown
   ret
 }
 
