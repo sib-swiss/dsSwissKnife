@@ -32,7 +32,7 @@
     assign('by.col', getOption('join.pivot.col'), envir = .mycache)
   }
   #dissalow change of critical options:
-  forbidden.options <- c(grepl('^default\\.|^datashield\\.',names(options())), 'hidden.fields', 'allowed.functions', 'join.pivot.col')
+  forbidden.options <- c(grep('^default\\.|^datashield\\.',names(options()), value = TRUE), 'hidden.fields', 'allowed.functions', 'join.pivot.col')
   assign('forbidden.options', forbidden.options, envir = .mycache)
   #test gitd
 }
