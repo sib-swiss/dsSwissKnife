@@ -1,7 +1,10 @@
 #' @export
 setOptionDSS<- function(opts){
   opts <- .decode.arg(opts)
-  options(opts)
+  # ensure no setting of critical options:
+  nono <- get('forbidden.options', envir = .mycache) # forbidden.options set in .init
+  yesyes <- setdiff(names(opts), nono)
+  options(opts[yesyes])
   return(TRUE)
 }
 

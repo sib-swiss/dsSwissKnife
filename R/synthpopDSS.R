@@ -12,7 +12,7 @@ synthpopDSS <- function(data, arglist, newobj = NULL){
 
   for(i in names(arglist)){
     if(grepl('minbucket', i, fixed = TRUE)){
-      if(arglist[[i]] > min_minbucket){
+      if(arglist[[i]] < min_minbucket){
         arglist[[i]] <- min_minbucket
       }
     }
@@ -27,10 +27,11 @@ synthpopDSS <- function(data, arglist, newobj = NULL){
   # more sanitizing, the drop. args are essential, otherwise it returns the actual data:
   arglist[['drop.not.used']] <- TRUE
   arglist [['drop.pred.only']] <- TRUE
-  # models is risky to I think:
+  # models is risky too I think:
   arglist[['models']] <- FALSE
   arglist[['strata']] <- NULL
-  do.call(synthpop::syn, arglist)
+  ret <- do.call(synthpop::syn, arglist)
+  return(ret$syn)
 }
 
 
