@@ -8,7 +8,15 @@ joinDSS <- function(what, type='full', bycol = NULL){
     bycol <- unlist(bycol)
   }
   where <- parent.frame()
-  what <- lapply(.decode.arg(what), function(x) get(x, envir = where))
+  what <- lapply(.decode.arg(what), function(x) {
+                                      tryCatch(get(x, envir = where), error = function(e){
+                                        if(grepl('$',x)){
+                                          temp <- unlist(strsplit(x, "\\$"))
+                                          lst <- get(temp[1], envir = where)
+                                          lst[[temp[2]]]
+                                        }
+                                      })
+                                    })
 
   if (type == 'full'){
     ret <- Reduce(function(x,y) dplyr::full_join(x,y, by = bycol), what )
