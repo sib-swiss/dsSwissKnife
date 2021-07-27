@@ -16,7 +16,7 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
     km.name <- paste0('km_clust', k)
     km <- suppressWarnings( kmeans(x = what, centers = centers, iter.max = iter.max,  nstart = nstart, algorithm = .decode.arg(algorithm)) ) # don't want 'empty cluster' or 'did not converge'
     #create a vector with cluster membership
-    cluster.membership <- as.vector(fitted(km, 'classes'))
+    cluster.membership <- factor(fitted(km, 'classes'))
     #set attribute to allow download
     attr(cluster.membership, 'download_allowed') <- TRUE
     assign(paste0(whatname,'_', km.name), cluster.membership, envir = parent.frame())
@@ -40,10 +40,12 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
     }))
     #set attribute to allow download
     if(.not.enough.members(cluster.membership)){
-      return(FALSE)
-    }
+      ## only if it has enough members per cluster (might consider not creating it at all, as below)
+      ##return(FALSE)
+
     attr(cluster.membership, 'download_allowed') <- TRUE
     #create a downloadable vector with cluster membership
+    }
 
     assign(paste0(whatname,'_', km.name), cluster.membership, envir = parent.frame())
 
