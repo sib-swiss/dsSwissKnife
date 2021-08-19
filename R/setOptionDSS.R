@@ -5,6 +5,7 @@ setOptionDSS<- function(opts){
   nono <- get('forbidden.options', envir = .mycache) # forbidden.options set in .init
   yesyes <- setdiff(names(opts), nono)
   options(opts[yesyes])
+  return(TRUE)
 }
 
 getOptionDSS <- function(opts = NULL){
