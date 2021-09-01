@@ -68,7 +68,8 @@
     sapply(names(my.dictionary), function(x){
       some.thing <<- gsub(x, my.dictionary[x], some.thing)
     })
-    some.thing <- jsonlite::fromJSON(RCurl::base64Decode(some.thing), simplifyMatrix = simplifyMatrix)
+   # some.thing <- jsonlite::fromJSON(RCurl::base64Decode(some.thing), simplifyMatrix = simplifyMatrix)
+    some.thing <- jsonlite::unserializeJSON(RCurl::base64Decode(some.thing))
   }
   return(some.thing)
 }

@@ -19,6 +19,7 @@ safeSubset <- function(df, row.filter = TRUE, col.filter = TRUE){
   }
   # take a snapshot of the current session
   safe.objs <- .ls.all()
+  safe.objs[['.GlobalEnv']] <- setdiff(safe.objs[['.GlobalEnv']], '.Random.seed')  # leave alone .Random.seed for sample()
   # lock everything so no objects can be changed
   .lock.unlock(safe.objs, lockBinding)
   tryCatch({

@@ -14,7 +14,7 @@ License:
 Encoding: UTF-8
 LazyData: true
 Depends: RCurl, jsonlite 
-Suggests: nlme, VIM, png, synthpop
+Suggests: nlme, VIM, png, synthpop, cluster
 AggregateMethods: partCov,
  partColMeans,
  partRange,

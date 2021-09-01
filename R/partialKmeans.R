@@ -20,6 +20,7 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
     #set attribute to allow download
     attr(cluster.membership, 'download_allowed') <- TRUE
     assign(paste0(whatname,'_', km.name), cluster.membership, envir = parent.frame())
+    km[['silhouette']] <- cluster::silhouette(km$cluster, dist(what))
     return(km)
   }
   if(membership) {
@@ -38,8 +39,9 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
     cluster.membership <- factor(apply(what, 1, function(x){
       .shortest_distance(x, centers)$index
     }))
+    sil <- cluster::silhouette(as.integer(cluster.membership), dist(what))
     #set attribute to allow download
-    if(.not.enough.members(cluster.membership)){
+    if(!.not.enough.members(cluster.membership)){
       ## only if it has enough members per cluster (might consider not creating it at all, as below)
       ##return(FALSE)
 
@@ -49,7 +51,8 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
 
     assign(paste0(whatname,'_', km.name), cluster.membership, envir = parent.frame())
 
-    return(TRUE)
+    return(sil)
+
   }
 
   if (!is.null(means)){
@@ -102,3 +105,4 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
   counts <- table(x)
   return(any(counts <= thresh))
 }
+
