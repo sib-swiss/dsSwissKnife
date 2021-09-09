@@ -14,24 +14,33 @@
 #' @param ...: other parameters to `randomForest`.
 #'
 
-forestDSS <- function(train = NULL, test = NULL) {
-  if (!is.null(test)){
-    test <- .decode.arg(test, simplifyMatrix = TRUE)
-    test$testData <- get(test$testData, envir = parent.frame())
-    test$forest <- sapply(test$forest, function(x){
+#forestDSS <- function(train = NULL, test = NULL) {
+forestDSS <- function(...) {
+  arglist <- list(...)
+
+  if ('testData' %in% names(arglist)){
+   # test <- .decode.arg(test, simplifyMatrix = TRUE)
+   # test$testData <- get(test$testData, envir = parent.frame())
+    testData <- get(arglist$testData, envir = parent.frame())
+    arglist <- within(arglist, rm(testData))
+    enc <- Reduce(paste0, arglist)
+
+    forest <- .decode.arg(enc)
+#    test$forest <- sapply(test$forest, function(x){
   #    if(exists('err.rate', where=x)){
         # redo the matrix if necessary
   #      x$err.rate <- Reduce(rbind, x$err.rate)
   #      dimnames(x$err.rate) <- list(NULL, 'OOB')
   #    }
       # reclass it
-      class(x) <- c('randomForest')
-      x
-    }, simplify = FALSE)
-    return(do.call(.predict, test))
+#      class(x) <- c('randomForest')
+#      x
+#    }, simplify = FALSE)
+ #   return(do.call(.predict, test))
+    return(.predict(forest, testData))
   } # done with the test part
 
-  train <- .decode.arg(train)
+  train <- .decode.arg(arglist$train)
     # If no expl_vars are given, take them all except dep_var
   if (is.null(train$expl_vars)) {
     try({
