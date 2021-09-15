@@ -18,11 +18,12 @@
 forestDSS <- function(...) {
   arglist <- list(...)
 
-  if ('testData' %in% names(arglist)){
+  if (arglist[[1]] == 'test'){
    # test <- .decode.arg(test, simplifyMatrix = TRUE)
    # test$testData <- get(test$testData, envir = parent.frame())
-    testData <- get(arglist$testData, envir = parent.frame())
-    arglist <- within(arglist, rm(testData))
+    testData <- get(arglist[[2]], envir = parent.frame())
+    #arglist <- within(arglist, rm(testData))
+    arglist <- arglist[-c(1,2)]
     enc <- Reduce(paste0, arglist)
 
     forest <- .decode.arg(enc)
@@ -34,38 +35,52 @@ forestDSS <- function(...) {
   #    }
       # reclass it
 #      class(x) <- c('randomForest')
-#      x
+#
 #    }, simplify = FALSE)
  #   return(do.call(.predict, test))
-    return(.predict(forest, testData))
-  } # done with the test part
+    prediction <- .predict(forest, testData)
 
-  train <- .decode.arg(arglist$train)
+    confmat <- table(prediction, testData[,forest[[1]]$dep_var])
+     if(length(rownames(confmat)) <= length(colnames(confmat))){ # can't use diag(), sometimes it's not square
+        dg <- unlist(lapply(rownames(confmat), function(x) confmat[x,x]))
+      } else {
+        dg <- unlist(lapply(colnames(confmat), function(x) confmat[x,x]))
+      }
+
+
+    acc <- sum(dg)/sum(confmat)
+    return(list(prediction = prediction, confusion_matrix = confmat, accuracy = acc))
+  } else if(arglist[[1]] == 'train'){  # done with the test part
+    train <- .decode.arg(arglist[[2]])
+    x <- get(train$what, envir = parent.frame())
     # If no expl_vars are given, take them all except dep_var
-  if (is.null(train$expl_vars)) {
-    try({
-      by.col <- get('by.col', envir = .mycache)
-      train$expl_vars = setdiff(colnames(df), c(by.col, train$dep_var))
-    }, silent = TRUE)
-  }
-  x <- get(train$what, envir = parent.frame())
-  train$what <- NULL
-  train <- train[!sapply(train, is.null)]
-  train$x <- x[,train$expl_vars]
-  train$y <- x[,train$dep_var]
-  if(!exists('ntree', where = train)){
-    train$ntree <- max(min(10, nrow(df)), 150)
-  }
-  if(!exists('nodesize', where = train)){
-    train$nodesize <- 5
-  }
+    if (is.null(train$expl_vars)){
+      try({
+        by.col <- get('by.col', envir = .mycache)
+        train$expl_vars = setdiff(colnames(x), c(by.col, train$dep_var))
+      }, silent = TRUE)
+
+    }
+    train$what <- NULL
+    train <- train[!sapply(train, is.null)]
+    train$x <- x[,train$expl_vars]
+    train$y <- x[,train$dep_var]
+    if(!exists('ntree', where = train)){
+      train$ntree <- max(min(10, nrow(df)), 150)
+    }
+    if(!exists('nodesize', where = train)){
+      train$nodesize <- 5
+    }
 
 
-  forest <- do.call(randomForest::randomForest, train)
-
+    forest <- do.call(randomForest::randomForest, train)
+  } else {
+    stop('First argument must be one of "train" or "test".', call. = FALSE)
+  }
   # Here we need to return a lighter object, that allows classification but not
   # patient identification.
   forest = .deidentify(forest)
+  forest$dep_var <- train$dep_var
   return(forest)
 }
 
@@ -88,7 +103,7 @@ forestDSS <- function(...) {
   if(exists('err.rate', where=forestObject)){
      forestObject$err.rate <- forestObject$err.rate[,'OOB',drop = FALSE]
   }
-
+  forestObject$y <- NULL
   forestObject
 }
 
@@ -109,6 +124,7 @@ forestDSS <- function(...) {
 #' @return a vector of length `nrow(testData)`.
 #'
 .predict <- function(forests, testData) {
+
   nforests = length(forests)
   predictionType = forests[[1]]$type
 
@@ -133,6 +149,10 @@ forestDSS <- function(...) {
 
     prediction = apply(sumVotes, 1, function(row) {
       maxclass = classes[which(row == max(row))]
+      # if there's more than one, toss the coin:
+      if(length(maxclass) >1 ){
+        maxclass  <- sample(maxclass,1)
+      }
       return(maxclass)
     })
 
