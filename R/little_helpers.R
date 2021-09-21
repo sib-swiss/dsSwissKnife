@@ -9,6 +9,8 @@
 #' 3) join.pivot.col - the default column to join (or pivot) by. In the absence of this default
 #' the 'by.col' argument in dssJoin and dssPivot becomes mandatory
 #'
+#' 4) forbidden.options - a number of opal administrative options that are not allowed to be changed by dssSetOption
+#'
 #' In order to set/modify any of these options the node administrator must create an .Rprofile file
 #' in the rserver conf directory (normally /var/lib/rserver/conf) and populate it with the necessary
 #' R commands to set the above options (see example). Then the following line must be added to the file

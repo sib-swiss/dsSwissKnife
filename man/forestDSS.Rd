@@ -4,7 +4,7 @@
 \alias{forestDSS}
 \title{Construct of a random forest based on training set `df`.}
 \usage{
-forestDSS(df, dep_var, expl_vars, nodesize = 5, ...)
+forestDSS(...)
 }
 \arguments{
 \item{df:}{[data frame] The training dataset.}
