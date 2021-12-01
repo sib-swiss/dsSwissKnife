@@ -5,7 +5,9 @@
 #'
 #'@export
 showInfo <- function(df, limit.levels = 'FALSE'){
-
+  if(nrow(df) == 0){
+    return(NULL)
+  }
   #just in case... :
   hidden <- get('hidden', envir = .mycache)
   cols <- colnames(df)[!(colnames(df) %in% hidden)]
