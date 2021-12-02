@@ -5,9 +5,8 @@ coxphDSS <- function(arglist){
   caller_frame = parent.frame()
   arglist$data <- get(arglist[['data']], envir = caller_frame)
 
-  #sanitize:
-  hidden <- get('hidden', envir = .mycache)
-  arglist$data <- arglist$data[, setdiff(names(arglist$data), hidden)]
+
+  arglist$data <- arglist$data[, .trim_hidden_fields(names(arglist$data))]
   arglist$x <- FALSE
   arglist$model <- FALSE
   # look for a 'newdata' data frame for the fit

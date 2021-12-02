@@ -4,7 +4,8 @@
 partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, split = FALSE, iter.max = NULL,  nstart = NULL, algorithm = 'Forgy'){
   centers <- .decode.arg(centers)
   what <- get(whatname, envir = parent.frame())
-  allowed <- setdiff(colnames(what), get('hidden', envir = .mycache))
+  #allowed <- setdiff(colnames(what), get('hidden', envir = .mycache))
+  allowed <- .trim_hidden_fields(colnames(what))
   what <- .split.numerics(what[,allowed])$numerics
   if(split){  # just apply kmeans and get out
     if(length(centers) == 1L) { # it's a number

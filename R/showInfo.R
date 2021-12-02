@@ -1,5 +1,5 @@
 #' @title Show the levels for all factors in a dataframe
-#' @description It filters out  a blacklist of columns ('hidden' vector in the .mycache environment)
+#' @description It filters out  a blacklist of columns (the options 'hidden.fields' and 'hidden.fields.regexes')
 #' @param df  a dataframe
 #' @return levels for all non blacklisted columns
 #'
@@ -9,8 +9,7 @@ showInfo <- function(df, limit.levels = 'FALSE'){
     return(NULL)
   }
   #just in case... :
-  hidden <- get('hidden', envir = .mycache)
-  cols <- colnames(df)[!(colnames(df) %in% hidden)]
+  cols <- .trim_hidden_fields(colnames(df))
 
   if(length(cols) == 0){
     return(NULL)
@@ -38,7 +37,7 @@ showInfo <- function(df, limit.levels = 'FALSE'){
 
 showLevels <- function(x, limit.levels = 'FALSE'){
   # show levels only if not too disclosive
-  if (!is.factor(x) || (x %in% get('hidden', envir = .mycache))){
+  if (!is.factor(x) || length(.trim_hidden_fields(x)) == 0 ){
     return(NULL)
   }
   lev <-  levels(x)

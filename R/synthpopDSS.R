@@ -3,10 +3,7 @@ synthpopDSS <- function(data, arglist, newobj = NULL){
   data <- get(data, envir = parent.frame())
   arglist <- .decode.arg(arglist)
   #trim the hidden fields:
-  hidden <- get('hidden', envir = .mycache)
-  if(!is.null(hidden)){
-    data[hidden] <- NULL
-  }
+  data <- data[,.trim_hidden_fields(colnames(data))]
   arglist[['data']] <- data
   min_minbucket <- getOption("datashield.privacyLevel", default = 5)
 

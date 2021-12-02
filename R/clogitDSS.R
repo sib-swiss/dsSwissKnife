@@ -7,8 +7,7 @@ clogitDSS <- function(arglist){
   arglist <- .decode.arg(arglist)
   arglist$formula <- as.formula(arglist[['formula']])
   arglist$data <- get(arglist[['data']], envir = .GlobalEnv)
-  hidden <- get('hidden', envir = .mycache)
-  arglist$data <- arglist$data[, setdiff(names(arglist$data), hidden)]
+  arglist$data <- arglist$data[, .trim_hidden_fields(names(arglist$data))]
   arglist$x <- FALSE
   arglist$model <- FALSE
 

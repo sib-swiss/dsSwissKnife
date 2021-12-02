@@ -23,7 +23,7 @@ safeSubset <- function(df, row.filter = TRUE, col.filter = TRUE){
   # lock everything so no objects can be changed
   .lock.unlock(safe.objs, lockBinding)
   tryCatch({
-    hidden <-  get('hidden', envir = .mycache)
+    #hidden <-  get('hidden', envir = .mycache)
     #removing this restriction for now:
     #mycols <- setdiff(colnames(df), hidden)
     #ret <-  df[eval(parse(text = row.filter), envir = df[,mycols], enclos = .GlobalEnv), eval(parse(text = col.filter), envir = df[,mycols], enclos = .GlobalEnv), drop = FALSE]

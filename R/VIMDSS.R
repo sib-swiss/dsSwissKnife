@@ -8,12 +8,11 @@ VIMDSS <- function(func, arglist, newobj = NULL){
   myargs <- list(...)
   # get rid of SUBJID in the imputation:
   dfcols <- colnames(myargs$x)
-  hidden <- get('hidden', envir = .mycache)
   sapply(c('variable', 'dist_var'), function(p){
     if(is.null(myargs[[p]])){
       myargs[[p]] <<- dfcols
     }
-    myargs[[p]] <<- setdiff(myargs[[p]], hidden)
+    myargs[[p]] <<- .trim_hidden_fields(myargs[[p]])
   })
   names(myargs)[names(myargs)=='x'] <- 'data'
   out <- do.call(VIM::kNN, myargs)

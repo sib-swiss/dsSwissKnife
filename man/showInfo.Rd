@@ -13,5 +13,5 @@ showInfo(df, limit.levels = "FALSE")
 levels for all non blacklisted columns
 }
 \description{
-It filters out  a blacklist of columns ('hidden' vector in the .mycache environment)
+It filters out  a blacklist of columns (the options 'hidden.fields' and 'hidden.fields.regexes')
 }

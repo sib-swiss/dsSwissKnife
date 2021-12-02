@@ -49,8 +49,8 @@
   #  return(NA)
   #}
   #list(numerics = as.data.frame(subset(x, TRUE, nums)), others = as.data.frame(subset(x, TRUE, !nums)))
-  hidden <-  get('hidden', envir = .mycache)
-  nums <- nums[!(names(nums) %in% hidden)] # no SUBJID
+  nums <- nums[.trim_hidden_fields(names(nums))] # no hidden fields
+
   list(numerics = x[,names(nums), drop= FALSE], others = x[,!(colnames(x) %in% names(nums)), drop = FALSE])
 }
 
@@ -260,4 +260,12 @@
 }
 
 
+.trim_hidden_fields <- function(cols){
+  #first pass:
+  cols <- setdiff(cols, getOption('hidden.fields'))
+  for (r in getOption('hidden.fields.regexes')){
+    cols <- grep(r, cols, value = TRUE, perl = TRUE)
+  }
+  cols
+}
 
