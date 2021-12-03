@@ -264,7 +264,7 @@
   #first pass:
   cols <- setdiff(cols, getOption('hidden.fields'))
   for (r in getOption('hidden.fields.regexes')){
-    cols <- grep(r, cols, value = TRUE, perl = TRUE)
+    cols <- grep(r, cols, value = TRUE, perl = TRUE, invert = TRUE)
   }
   cols
 }
