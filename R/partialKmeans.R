@@ -1,7 +1,7 @@
 
 #' @export
 #'
-partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, split = FALSE, iter.max = NULL,  nstart = NULL, algorithm = 'Forgy'){
+partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, split = FALSE, iter.max = NULL,  nstart = NULL, algorithm = 'Forgy', suffix = NULL){
   centers <- .decode.arg(centers)
   what <- get(whatname, envir = parent.frame())
   #allowed <- setdiff(colnames(what), get('hidden', envir = .mycache))
@@ -15,6 +15,10 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
       k <- nrow(centers)
     }
     km.name <- paste0('km_clust', k)
+    if(!is.null(suffix)){
+      km.name <- suffix
+    }
+
     km <- suppressWarnings( kmeans(x = what, centers = centers, iter.max = iter.max,  nstart = nstart, algorithm = .decode.arg(algorithm)) ) # don't want 'empty cluster' or 'did not converge'
     #create a vector with cluster membership
     cluster.membership <- factor(fitted(km, 'classes'))
@@ -28,6 +32,10 @@ partialKmeans <- function(whatname, centers, means = NULL, membership = FALSE, s
 
     centers <- as.matrix(centers)
     km.name <- paste0('km_clust', nrow(centers))
+    if(!is.null(suffix)){
+      km.name <- suffix
+    }
+
     #    cluster.membership <-  factor(apply(what, 1, function(x){
     # not very efficient: loop through the points, calculate each point's distance to the centers,
     # maybe implement this in C at some point
