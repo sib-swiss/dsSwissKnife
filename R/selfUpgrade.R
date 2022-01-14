@@ -8,11 +8,11 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, verbose
   if(!is.null(lib)){
     lib = .decode.arg(lib)
   }
-  x <- list( dsSwissKnife = capture.output(install.packages('dsSwissKnife', lib = lib, repos=c('https://rhap-fdb01.vital-it.ch/repo', 'https://stat.ethz.ch/CRAN'),
+  x <- list( dsSwissKnife = capture.output(install.packages('dsSwissKnife', lib = lib, repos=c("https://sophia-fdb.vital-it.ch/SIB-R", 'https://rhap-fdb01.vital-it.ch/repo', 'https://sophia-fdb.vital-it.ch/CRAN'),
                                                        method = method), type = c('message')))
   if(!is.null(other.package)){
     x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
-                                                          repos=c('https://rhap-fdb01.vital-it.ch/repo',  'https://stat.ethz.ch/CRAN', 'https://cran.obiba.org'), method = method),type = c('message'))
+                                                          repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', 'https://cran.obiba.org'), method = method),type = c('message'))
     if('BiocManager' %in% other.package){
       BiocManager::install(ask = FALSE)
     }
