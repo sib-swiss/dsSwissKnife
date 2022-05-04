@@ -33,9 +33,9 @@ deriveColumn <- function(x, colname, formula){
 # egfr for Andreas Heinzel (beatdkd)
 
 egfr <- function(scr, sex, age, black = FALSE) {
-  if(length(scr) > 1){
-    stop('Only one measurement of creatinine allowed.')
-  }
+ # if(length(scr) > 1){
+#    stop('Only one measurement of creatinine allowed.')
+#  }
   if(tolower(sex) %in% c('m', 'male') ){
     alfa <- -0.411
     k <- 0.9
