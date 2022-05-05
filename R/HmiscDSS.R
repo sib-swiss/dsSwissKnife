@@ -1,4 +1,7 @@
 HmiscDSS <- function(func, arglist, newobj){
+  if(!'Hmisc' %in% installed.packages()[, 'Package']){
+    stop('Package Hmisc is not installed.')
+  }
   myenv <- parent.frame()
   force(myenv)
   dispatcher <- list(
