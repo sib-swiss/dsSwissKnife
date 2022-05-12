@@ -38,11 +38,11 @@ egfr <- function(scr, sex, age, black = FALSE) {
 #  }
   if(tolower(sex) %in% c('m', 'male') ){
     alfa <- -0.411
-    k <- 0.9
+    k <- 61.9
     coef1 <-  1
   } else if (tolower(sex) %in% c('f', 'female')){
     alfa <- -0.329
-    k <- 0.7
+    k <- 79.6
     coef1 <- 1.018
   }
 
