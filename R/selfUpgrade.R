@@ -1,5 +1,5 @@
 #' @export
-selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra = NULL, verbose = FALSE ){
+selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra = NULL, archive.url = NULL, verbose = FALSE ){
   # extra is for arguments passed to wget or curl
   # to ignore cert problems: method = 'wget', extra = '--no-check-certificate' or method = 'curl', extra = '-k'
   # systemd sometimes goes and deletes the rserv tempdir, we need to recreate it if necessary
@@ -11,15 +11,21 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra =
     lib = .decode.arg(lib)
   }
   if(!is.null(extra)){
-    download.file.extra = extra
+    options(download.file.extra = extra)
   }
   x <- list( dsSwissKnife = capture.output(install.packages('dsSwissKnife', lib = lib,
                                                             repos=c("https://sophia-fdb.vital-it.ch/SIB-R", 'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN'),
                                                             method = method), type = c('message')))
   if(!is.null(other.package)){
-    x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
+    if (!is.null(archive.url)){
+      x[[other.package]] <- capture.output(install.packages(paste0('https://sophia-fdb.vital-it.ch/CRAN/src/contrib/Archive/', archive.url), lib = lib,
+                                                            repos=null, type = 'source', method = method),type = c('message'))
+    } else {
+
+          x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
                                                           repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN'),
                                                           method = method),type = c('message'))
+    }
     if('BiocManager' %in% other.package){
       BiocManager::install(ask = FALSE)
     }
