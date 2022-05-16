@@ -10,6 +10,9 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra =
   if(!is.null(lib)){
     lib = .decode.arg(lib)
   }
+  if(!is.null(extra)){
+    download.file.extra = extra
+  }
   x <- list( dsSwissKnife = capture.output(install.packages('dsSwissKnife', lib = lib,
                                                             repos=c("https://sophia-fdb.vital-it.ch/SIB-R", 'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN'),
                                                             method = method), type = c('message')))
