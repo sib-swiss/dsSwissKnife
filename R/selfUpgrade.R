@@ -18,7 +18,8 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra =
                                                             method = method), type = c('message')))
   if(!is.null(other.package)){
     if (!is.null(archive.url)){
-      x[[other.package]] <- capture.output(install.packages(paste0('https://sophia-fdb.vital-it.ch/CRAN/src/contrib/Archive/', archive.url), lib = lib,
+      root <- trsplit(archive.url, '_', fixed = TRUE) %>% unlist %>% `[`(1) # get the package name without version
+      x[[other.package]] <- capture.output(install.packages(paste0('https://sophia-fdb.vital-it.ch/CRAN/src/contrib/Archive/', root, '/',archive.url), lib = lib,
                                                             repos=NULL, type = 'source', method = method),type = c('message'))
     } else {
 
