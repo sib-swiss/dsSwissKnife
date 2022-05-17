@@ -1,5 +1,5 @@
 #' @export
-selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra = NULL, archive.url = NULL, verbose = FALSE ){
+selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra = NULL, version = NULL, verbose = FALSE ){
   # extra is for arguments passed to wget or curl
   # to ignore cert problems: method = 'wget', extra = '--no-check-certificate' or method = 'curl', extra = '-k'
   # systemd sometimes goes and deletes the rserv tempdir, we need to recreate it if necessary
@@ -17,9 +17,8 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra =
                                                             repos=c("https://sophia-fdb.vital-it.ch/SIB-R", 'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN'),
                                                             method = method), type = c('message')))
   if(!is.null(other.package)){
-    if (!is.null(archive.url)){
-      root <- trsplit(archive.url, '_', fixed = TRUE) %>% unlist %>% `[`(1) # get the package name without version
-      x[[other.package]] <- capture.output(install.packages(paste0('https://sophia-fdb.vital-it.ch/CRAN/src/contrib/Archive/', root, '/',archive.url), lib = lib,
+    if (!is.null(version)){
+      x[[other.package]] <- capture.output(install.packages(paste0('https://sophia-fdb.vital-it.ch/CRAN/src/contrib/Archive/', other.package, '/',version), lib = lib,
                                                             repos=NULL, type = 'source', method = method),type = c('message'))
     } else {
 
