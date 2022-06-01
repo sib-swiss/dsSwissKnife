@@ -42,10 +42,17 @@ pcaScores <- function(x, rotation, center = TRUE, scale = FALSE, na.rm = FALSE, 
   scores <- z %*% .decode.arg(rotation, simplifyMatrix = TRUE)
   lam <- .decode.arg(lam)
   if(any(lam != 1)){
-    scores <- t(t(scores)/lam) # for biplot
+    scores <- t(scores)/lam
+    scores <- t(scores) # for biplot
   }
   scores <- as.data.frame(scores)
   colnames(scores) <- sub('V', 'Comp.', colnames(scores))
   # paste back the non numerics for later categorization
   cbind(scores, y$others)
+}
+
+
+
+points <- function(...){
+  print(c(...))
 }
