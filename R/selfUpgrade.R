@@ -18,12 +18,18 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra =
                                                             method = method), type = c('message')))
   if(!is.null(other.package)){
     if (!is.null(version)){
-      x[[other.package]] <- capture.output(install.packages(paste0('https://sophia-fdb.vital-it.ch/CRAN/src/contrib/Archive/', other.package, '/',version), lib = lib,
+      if(other.package %in% c('dsBase')){
+        x[[other.package]] <- capture.output(install.packages(paste0('https://sophia-fdb.vital-it.ch:8443/CRAN-DS/src/contrib/Archive/', other.package, '/',version), lib = lib,
+                                                              repos=NULL, type = 'source', method = method),type = c('message'))
+
+      } else {
+        x[[other.package]] <- capture.output(install.packages(paste0('https://sophia-fdb.vital-it.ch:8443/CRAN/src/contrib/Archive/', other.package, '/',version), lib = lib,
                                                             repos=NULL, type = 'source', method = method),type = c('message'))
+      }
     } else {
 
           x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
-                                                          repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN'),
+                                                          repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN',  'https://sophia-fdb.vital-it.ch:8443/CRAN-DS'),
                                                           method = method),type = c('message'))
     }
     if('BiocManager' %in% other.package){
@@ -51,5 +57,11 @@ biocInstall <- function(...){
   x <- list(...)
   x[['site_repository']] <- c('https://stat.ethz.ch/CRAN')
   x[['ask']] <- FALSE
-  capture.output(do.call(BiocManager::install, x), type= c('message'))
+  capture.output(do.call(BiocManagesr::install, x), type= c('message'))
+}
+
+
+.install_old_version <- function(urls, lib, method){
+  install.packages(paste0('https://sophia-fdb.vital-it.ch/CRAN/src/contrib/Archive/', other.package, '/',version), lib = lib,
+                   repos=NULL, type = 'source', method = method)
 }
