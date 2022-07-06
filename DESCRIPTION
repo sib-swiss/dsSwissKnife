@@ -45,7 +45,8 @@ AggregateMethods: partCov,
  HmiscDSS,
  linregDSS,
  DDRTreeDSS,
- gmDSS
+ gmDSS,
+ uwotDSS
 AssignMethods: pcaScores,
  subsetByClass,
  widenDSS,
