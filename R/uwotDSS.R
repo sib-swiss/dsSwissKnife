@@ -11,7 +11,9 @@ uwotDSS <- function(func, X, arglist = list(), model = NULL){
 
   if(!is.null(model)){ # this is a path to the saved model
     model <- .decode.arg(model)
-    model <- paste0('/var/lib/opal/fs', model)
+    if(model == 'uwot_model'){
+      writeBin(uwot_model, 'uwot_model', useBytes = TRUE)  # uwot_model has been uploaded in this session, it's the binary representation of a saved model
+    }
     arglist$model <- uwot::load_uwot(model)
   }
   mod <- do.call(eval(parse(text=paste0('uwot::', func))), arglist)
