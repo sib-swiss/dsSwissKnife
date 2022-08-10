@@ -10,6 +10,8 @@ uwotDSS <- function(func, X, arglist = list(), model = NULL){
   arglist$ret_extra = c()
 
   if(!is.null(model)){ # this is a path to the saved model
+    model <- .decode.arg(model)
+    model <- paste0('/var/lib/opal/fs', model)
     arglist$model <- uwot::load_uwot(model)
   }
   mod <- do.call(eval(parse(text=paste0('uwot::', func))), arglist)
