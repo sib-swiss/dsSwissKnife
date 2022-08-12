@@ -1,5 +1,5 @@
 #' @export
-selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra = NULL, version = NULL, verbose = FALSE ){
+selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra = NULL, version = NULL, verbose = FALSE, only.other = FALSE ){
   # extra is for arguments passed to wget or curl
   # to ignore cert problems: method = 'wget', extra = '--no-check-certificate' or method = 'curl', extra = '-k'
   # systemd sometimes goes and deletes the rserv tempdir, we need to recreate it if necessary
@@ -13,9 +13,13 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra =
   if(!is.null(extra)){
     options(download.file.extra = extra)
   }
+  if(!only.other || !is.null(other.package)){
   x <- list( dsSwissKnife = capture.output(install.packages('dsSwissKnife', lib = lib,
                                                             repos=c("https://sophia-fdb.vital-it.ch/SIB-R", 'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN'),
-                                                            method = method), type = c('message')))
+                                         method = method), type = c('message')))
+  } else {
+    x <- list()
+  }
   if(!is.null(other.package)){
     if (!is.null(version)){
       if(other.package %in% c('dsBase')){
