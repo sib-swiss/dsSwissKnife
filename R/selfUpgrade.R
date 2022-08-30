@@ -61,7 +61,7 @@ biocInstall <- function(...){
   x <- list(...)
   x[['site_repository']] <- c('https://stat.ethz.ch/CRAN')
   x[['ask']] <- FALSE
-  capture.output(do.call(BiocManagesr::install, x), type= c('message'))
+  capture.output(do.call(BiocManager::install, x), type= c('message'))
 }
 
 
