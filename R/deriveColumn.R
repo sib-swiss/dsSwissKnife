@@ -20,7 +20,7 @@ deriveColumn <- function(x, colname, formula){
   funcs <-  parsetree[parsetree$token == 'SYMBOL_FUNCTION_CALL', 'text']
   if(length(funcs) >0 ){
     allowed.funcs <- get('allowed.funcs', envir = .mycache)
-    culprits <- setdiff(funcs, allowed.funcs)
+    culprits <- setdiff(funcs, c(allowed.funcs, 'egfr', 'one.versus.others')) # allow these 2 by default
     if(length(culprits) > 0){
       # some illegal functions in there
       stop(paste(culprits, collapse=', '), ' not allowed here. For a list of allowed functions see the documentation.')
@@ -30,7 +30,7 @@ deriveColumn <- function(x, colname, formula){
   return(parsed)
 }
 
-# egfr for Andreas Heinzel (beatdkd)
+
 
 egfr <- function(scr, sex, age, black = FALSE) {
  # if(length(scr) > 1){
@@ -56,4 +56,14 @@ egfr <- function(scr, sex, age, black = FALSE) {
 }
 
 
+one.versus.others <- function(col, positive.level){
+  if(!is.factor(col)){
+    stop('The input must be a factor')
+  }
+  levs <- levels(col)
 
+  negative.level <- paste0('no_', positive.level)
+  levels(col) <- c(levels(col), negative.level)
+  col[col != positive.level ] <- negative.level
+  factor(col)
+}
