@@ -11,7 +11,9 @@ uwotDSS <- function(func, X, arglist = list(), model = NULL){
     arglist$ret_nn = FALSE
   }
   if('ret_extra' %in% nms){
-    arglist$ret_extra = c()
+    if(arglist$ret_extra == 'nn'){
+      arglist$ret_extra = c()
+    }
   }
   if(!is.null(model)){ # this is a path to the saved model
     model <- .decode.arg(model)
