@@ -20,7 +20,7 @@ deriveColumn <- function(x, colname, formula){
   funcs <-  parsetree[parsetree$token == 'SYMBOL_FUNCTION_CALL', 'text']
   if(length(funcs) >0 ){
     allowed.funcs <- get('allowed.funcs', envir = .mycache)
-    culprits <- setdiff(funcs, c(allowed.funcs, 'egfr', 'one.versus.others')) # allow these 2 by default
+    culprits <- setdiff(funcs, c(allowed.funcs, 'egfr', 'one.versus.others', 'rnorm.0.1')) # allow these 2 by default
     if(length(culprits) > 0){
       # some illegal functions in there
       stop(paste(culprits, collapse=', '), ' not allowed here. For a list of allowed functions see the documentation.')
@@ -67,3 +67,13 @@ one.versus.others <- function(col, positive.level){
   col[col != positive.level ] <- negative.level
   factor(col)
 }
+
+rnorm.0.1 <- function(){
+  # on column of standard normal distribution
+  n <- nrow(as.data.frame(as.list(parent.frame())))
+  rnorm(n,0,1)
+}
+
+
+ftest <- '(function() nrow(as.data.frame(as.list(parent.frame())))()'
+

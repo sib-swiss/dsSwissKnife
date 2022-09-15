@@ -61,5 +61,6 @@ AssignMethods: pcaScores,
  tDSS,
  asDSS,
  makeFactorsDSS,
- oneHotDSS
+ oneHotDSS,
+ residLmDSS
 RoxygenNote: 7.1.2
