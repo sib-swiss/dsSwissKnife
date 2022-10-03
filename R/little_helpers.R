@@ -269,3 +269,10 @@
   cols
 }
 
+
+.betterExtract <- function(what){
+    terms <- strsplit(what, '$' , fixed = TRUE)[[1]]
+    Reduce(function(x,y){
+      get(y, envir = as.environment(x))
+    }, terms, init = .GlobalEnv)
+}
