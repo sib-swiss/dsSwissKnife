@@ -6,14 +6,11 @@ uwotDSS <- function(func, X, arglist = list(), model = NULL){
   arglist <- .decode.arg(arglist)
   arglist$X <- X
   # some sanitizing:
+  arglist$ret_nn = FALSE
+  arglist$ret_model = FALSE # no full model back
   nms <- names(arglist)
-  if('ret_nn' %in% nms){
-    arglist$ret_nn = FALSE
-  }
   if('ret_extra' %in% nms){
-    if(arglist$ret_extra == 'nn'){
-      arglist$ret_extra = c()
-    }
+    arglist$ret_extra < intersect(arglist$ret_extra, 'fgraph')
   }
   if(!is.null(model)){ # this is a path to the saved model
     model <- .decode.arg(model)
@@ -24,14 +21,14 @@ uwotDSS <- function(func, X, arglist = list(), model = NULL){
   }
 
   res <- do.call(eval(parse(text=paste0('uwot::', func))), arglist)
-  if(func == 'umap'){ # for the model we have to create and return a blob
-    fname <- tempfile(pattern='uwotDSS', tmpdir = tempdir(check=TRUE))
-    uwot::save_uwot(res, fname, unload = TRUE)
-    # get the size in order to read it back
-    sz <- file.info(fname)$size
-    # read and return it
-    res  <- readBin(fname, 'raw', n=sz)
-  }
+#  if(func == 'umap'){ # for the model we have to create and return a blob
+#    fname <- tempfile(pattern='uwotDSS', tmpdir = tempdir(check=TRUE))
+#    uwot::save_uwot(res, fname, unload = TRUE)
+#    # get the size in order to read it back
+#    sz <- file.info(fname)$size
+#    # read and return it
+#    res  <- readBin(fname, 'raw', n=sz)
+#  }
 
   return(res)
 }
