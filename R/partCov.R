@@ -12,7 +12,9 @@
 #'
 
 
-partCov <- function(x, means = NULL,  collist = NULL){
+partCov <- function(x, means = NULL,  collist = NULL, wt = NULL, cor = FALSE, center = TRUE, method = 'unbiased'){
+
+
   # returns a matrix of
   #   sums of
   #     products (for each pair of dimensions) of
@@ -43,7 +45,18 @@ partCov <- function(x, means = NULL,  collist = NULL){
   if(!.dsBase_isValidDSS(x)){
     stop(paste0('only ', nrow(x), ' rows'))
   }
-  means <- .decode.arg(means)
+
+  # if wt (weights) is not null return cov.wt only on this node
+  if(!is.null(wt)){
+    wt <- .decode.arg(wt)
+
+    if(length(wt) == 1){ # it's a name in the global env (maybe a data frame column)
+      wt <- .betterExtract(wt, startEnv = parent.frame())
+    }
+    return(cov.wt(z, wt, cor, center, method))
+  }
+
+means <- .decode.arg(means)
 
   if(is.null(means) | length(means) == 0){
     # no global means, we return the local term

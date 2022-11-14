@@ -6,9 +6,13 @@ uwotDSS <- function(func, X, arglist = list(), model = NULL){
   arglist <- .decode.arg(arglist)
   arglist$X <- X
   # some sanitizing:
-  arglist$ret_nn = FALSE
-  arglist$ret_model = FALSE # no full model back
   nms <- names(arglist)
+  if('ret_nn' %in% nms){
+    arglist$ret_nn = FALSE
+  }
+  if('ret_model' %in% nms){
+    arglist$ret_model = FALSE # no full model back
+  }
   if('ret_extra' %in% nms){
     arglist$ret_extra < intersect(arglist$ret_extra, 'fgraph')
   }
