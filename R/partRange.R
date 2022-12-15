@@ -31,7 +31,6 @@ partRange <- function(...){
 }
 
 .sloppy.range <- function(x){
-  rr <- c(min(x, na.rm=TRUE), max(x, na.rm=TRUE))
   rr <- range(x, na.rm=TRUE)
   random1 <- runif(1, 0.95, 1)
   random2 <- runif(1, 1, 1.05)
