@@ -32,9 +32,12 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra =
       }
     } else {
 
+        #  x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
+        #                                                  repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN',  'https://sophia-fdb.vital-it.ch:8443/CRAN-DS'),
+        #                                                  method = method),type = c('message'))
           x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
-                                                          repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN',  'https://sophia-fdb.vital-it.ch:8443/CRAN-DS'),
-                                                          method = method),type = c('message'))
+                                                                repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN',  'https://sophia-fdb.vital-it.ch:8443/CRAN-DS'),
+                                                                method = method), type = 'message')
     }
     if('BiocManager' %in% other.package){
       BiocManager::install(ask = FALSE)
@@ -52,6 +55,7 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra =
                                tryCatch(system('cat /proc/meminfo  | grep MemFree', intern = TRUE),
                                         error = function(f) paste0(e, ' - ', f) )
                         })
+    x[['ownership']] <- system(paste0('ls -rtl ', x$libs[1]), intern = TRUE)
   }
   return(x)
 }

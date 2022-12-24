@@ -28,7 +28,7 @@ synthpopDSS <- function(data, arglist, newobj = NULL){
   arglist[['models']] <- FALSE
   arglist[['strata']] <- NULL
   ret <- do.call(synthpop::syn, arglist)
-  return(ret$syn)
+  return(ret[c('syn', 'predictor.matrix')])
 }
 
 
