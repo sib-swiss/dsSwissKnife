@@ -1,5 +1,6 @@
 
-deriveColumn <- function(x, colname, formula){
+deriveColumn <- function(x, colname, formula ){
+
   formula <- .decode.arg(formula)
   parsed <- .parseFormula(formula)
   x[[colname]] <- eval(parsed, envir = x)
@@ -20,7 +21,7 @@ deriveColumn <- function(x, colname, formula){
   funcs <-  parsetree[parsetree$token == 'SYMBOL_FUNCTION_CALL', 'text']
   if(length(funcs) >0 ){
     allowed.funcs <- get('allowed.funcs', envir = .mycache)
-    culprits <- setdiff(funcs, c(allowed.funcs, 'egfr', 'one.versus.others', 'rnorm.0.1')) # allow these 2 by default
+    culprits <- setdiff(funcs, c(allowed.funcs, 'egfr', 'one.versus.others', 'rnorm.0.1', 'mergeConceptIds')) # allow these 4 by default
     if(length(culprits) > 0){
       # some illegal functions in there
       stop(paste(culprits, collapse=', '), ' not allowed here. For a list of allowed functions see the documentation.')
@@ -75,5 +76,41 @@ rnorm.0.1 <- function(){
 }
 
 
-ftest <- '(function() nrow(as.data.frame(as.list(parent.frame())))()'
+# ftest <- '(function() nrow(as.data.frame(as.list(parent.frame())))()'
+
+#.mergeTwo <- function(first, second){
+#  first[is.na(first)] <- second[is.na(first)]
+#  first
+#}
+
+#mergeConceptIds <- function(primaryConceptId, dict){
+#  myenv <- parent.frame()
+#  Reduce(.mergeTwo, data.frame(get(primaryConceptId, envir = myenv), unlist(lapply(dict[[primaryConceptId]], function(x) get(x, envir = myenv)))))
+#}
+
+mergeConceptIds <- function(primaryConceptId, dict){
+myenv <- parent.frame()
+dict <- .betterExtract(dict, .GlobalEnv)
+nms <- names(dict)
+vals <- Reduce(c, dict)
+tot <- c(nms, vals)
+if(length(tot) != length(unique(tot))){
+  stop('Duplicate names found in the dictionary.')
+}
+  p <- tryCatch(get(primaryConceptId, envir = myenv), error = function(e){
+   someName <- ls(envir = myenv)[1]
+   rep(NA, length(myenv[[someName]]))
+  })
+
+  for (mycol in  dict[[primaryConceptId]]){
+    if(exists(mycol, envir = myenv, inherits = FALSE)){
+      myVector <- get(mycol, envir = myenv)
+      p[is.na(p)] <- myVector[is.na(p)]
+    }
+  }
+  if(all(is.na(p))){
+    p <- NULL
+  }
+  p
+}
 
