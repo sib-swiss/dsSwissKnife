@@ -1,4 +1,4 @@
-#' @export
+00#' @export
 selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra = NULL, version = NULL, verbose = FALSE, only.other = FALSE ){
   # extra is for arguments passed to wget or curl
   # to ignore cert problems: method = 'wget', extra = '--no-check-certificate' or method = 'curl', extra = '-k'

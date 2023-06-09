@@ -104,6 +104,7 @@ if(length(tot) != length(unique(tot))){
 
   for (mycol in  dict[[primaryConceptId]]){
     if(exists(mycol, envir = myenv, inherits = FALSE)){
+
       myVector <- get(mycol, envir = myenv)
       p[is.na(p)] <- myVector[is.na(p)]
     }

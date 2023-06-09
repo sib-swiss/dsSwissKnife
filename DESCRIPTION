@@ -49,7 +49,8 @@ AggregateMethods: partCov,
  uwotDSS,
  uploadDSS,
  tableDSS,
- mvtnormDSS 
+ mvtnormDSS,
+ linregDSS
 AssignMethods: pcaScores,
  subsetByClass,
  widenDSS,
