@@ -28,7 +28,7 @@
   .mycache <<- new.env(parent=.GlobalEnv)
   assign('hidden', getOption('hidden.fields'), envir = .mycache)
   allowed.funcs <- c('abs', 'round', 'ceiling', 'floor', 'signif', 'length', 'paste0', 'as.Date', 'as.character',
-                     'as.numeric','egfr', 'as.factor', 'sub', 'gsub', 'grep','grepl', getOption('allowed.functions'))
+                     'as.numeric','egfr', 'as.factor', 'sub', 'gsub', 'grep','grepl', 'sqrt', getOption('allowed.functions'))
   #ign('allowed.funcs', allowed.funcs, envir = .mycache)
   assign('allowed.funcs', allowed.funcs, envir = .mycache)
   if(!is.null(getOption('join.pivot.col'))){

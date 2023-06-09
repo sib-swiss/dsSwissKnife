@@ -56,6 +56,33 @@ egfr <- function(scr, sex, age, black = FALSE) {
 
 }
 
+egfr <- function(scr, sex, age, black = FALSE) {
+  # vectorized version
+  alfa <- c()
+  k <- c()
+  coef1 <- c()
+  males <- which(tolower(sex) %in% c('m', 'male') )
+  females <- which(tolower(sex) %in% c('f', 'female') )
+  alfa[males] <- -0.411
+  k[males] <- 61.9
+  coef1[males] <-  1
+
+  alfa[females] <- -0.329
+  k[females]<- 79.6
+  coef1[females] <- 1.018
+
+
+
+  coef2 <- rep(1, length(sex))
+  if(length(black) < length(sex)){
+    black <- rep(black, length(sex))
+  }
+
+  coef2[which(black == TRUE)] <- 1.159
+
+  return(141 * (unlist(lapply(scr/k, min, 1)))^alfa * (unlist(lapply(scr/k,max, 1)))^(-1.209) * 0.993^age * coef1 * coef2)
+
+}
 
 one.versus.others <- function(col, positive.level){
   if(!is.factor(col)){
