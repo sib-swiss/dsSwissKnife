@@ -41,7 +41,7 @@ rangerDSS <- function(func, arglist, newobj = NULL){
  if(!is.null(newobj)){
    assign(newobj, out, envir = myparent)
  }
-
+return(out)
 }
 
 
