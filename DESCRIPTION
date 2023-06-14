@@ -50,7 +50,8 @@ AggregateMethods: partCov,
  uploadDSS,
  tableDSS,
  mvtnormDSS,
- linregDSS
+ linregDSS,
+ rangerDSS
 AssignMethods: pcaScores,
  subsetByClass,
  widenDSS,
