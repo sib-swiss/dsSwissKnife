@@ -277,3 +277,17 @@
       get(y, envir = as.environment(x))
     }, terms, init = startEnv)
 }
+
+#######################
+
+
+.ls.all.new <- function(ret = list(),start = '.GlobalEnv'){
+  print(start)
+  envir <- .betterExtract(start)
+  objs <- ls(envir, all.names = TRUE)
+  # ret <- list()
+  ret[[start]] <- objs
+  more.envs <- names(which(sapply(objs, function(x)is.environment(get(x, envir = envir, inherits = FALSE)))==TRUE))
+  c(ret,unlist(sapply(more.envs,function(x) .ls.all(list(), paste0(start, '$',x)), USE.NAMES = TRUE, simplify = FALSE), recursive = FALSE))
+
+}
