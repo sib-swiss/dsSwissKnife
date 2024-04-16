@@ -51,7 +51,8 @@ AggregateMethods: partCov,
  tableDSS,
  mvtnormDSS,
  linregDSS,
- rangerDSS
+ rangerDSS,
+ consensusOPLSDSS
 AssignMethods: pcaScores,
  subsetByClass,
  widenDSS,
