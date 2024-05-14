@@ -22,13 +22,13 @@ snfDSS <- function(fn, objs, further.args, action = 'keep', keep.name=NULL){
     out <- get(x, envir = parent.frame())
     out
   })
-
+#
   if(fn == 'standardNormalization'){
-    if(!('SUBJID' %in% colnames(real.objs[[1]]))){
-      stop('The input object must contain the SUBJID column.')
-    }
-    row.names(real.objs[[1]]) <- real.objs[[1]]$SUBJID
-    real.objs[[1]] <- real.objs[[1]][,setdiff(colnames(real.objs[[1]]), 'SUBJID')]
+#    if(!('SUBJID' %in% colnames(real.objs[[1]]))){
+#      stop('The input object must contain the SUBJID column.')
+#    }
+#    row.names(real.objs[[1]]) <- real.objs[[1]]$SUBJID
+#    real.objs[[1]] <- real.objs[[1]][,setdiff(colnames(real.objs[[1]]), 'SUBJID')]
     real.objs[[1]] <- t(real.objs[[1]])
   }
 
