@@ -23,14 +23,14 @@ snfDSS <- function(fn, objs, further.args, action = 'keep', keep.name=NULL){
     out
   })
 #
-  if(fn == 'standardNormalization'){
+#  if(fn == 'standardNormalization'){
 #    if(!('SUBJID' %in% colnames(real.objs[[1]]))){
 #      stop('The input object must contain the SUBJID column.')
 #    }
 #    row.names(real.objs[[1]]) <- real.objs[[1]]$SUBJID
 #    real.objs[[1]] <- real.objs[[1]][,setdiff(colnames(real.objs[[1]]), 'SUBJID')]
-    real.objs[[1]] <- t(real.objs[[1]])
-  }
+#    real.objs[[1]] <- t(real.objs[[1]])
+#  }
 
   if(fn %in% c('SNF', 'rankFeaturesByNMI')){
     real.objs <- list(real.objs)
