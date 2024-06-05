@@ -11,8 +11,9 @@ consensusOPLSDSS <- function(arglist){
  }
   out <- do.call(ConsensusOPLS::ConsensusOPLS, arglist)
   # out$call <- NULL
- out$optimal <- out$optimal[c('modelCV', 'VIP')]
- out$permuted <- lapply(out$permuted, function(x) x[c('modelCV', 'VIP')])
+ #out$optimal <- out$optimal[c('modelCV', 'VIP')]
+ #out$permuted <- lapply(out$permuted, function(x) x[c('modelCV', 'VIP')])
+ out@cv <- out@cv[c('AllYhat', 'Q2Yhat', 'cvTestIndex','DQ2Yhat')]
  return(out)
 }
 
