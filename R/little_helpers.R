@@ -200,6 +200,7 @@
   nfilter <- .dsBase_setFilterDSS()
   if (class(obj) == "character" | class(obj) == "integer" |
       class(obj) == "logical" | class(obj) == "numeric") {
+    obj <- obj[!is.na(obj)]
     if (length(obj) > 0 & length(obj) < nfilter) {
       return(FALSE)
     }
