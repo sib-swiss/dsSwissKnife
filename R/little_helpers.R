@@ -195,19 +195,21 @@
 
 }
 
-
+.isValidAtomic <- function(obj, nfilt){
+  obj <- obj[!is.na(obj)]
+  if (length(obj) > 0 & length(obj) < nfilt) {
+    return(FALSE)
+  }
+  else {
+    return(TRUE)
+  }
+}
 .dsBase_isValidDSS <- function (obj) {
   nfilter <- .dsBase_setFilterDSS()
   if (class(obj) == "character" | class(obj) == "integer" |
       class(obj) == "logical" | class(obj) == "numeric") {
-    if (length(obj) > 0 & length(obj) < nfilter) {
-      return(FALSE)
-    }
-    else {
-      return(TRUE)
-    }
-  }
-  else {
+    return(.isValidAtomic(obj, nfilter))
+  } else {
     if (class(obj) == "factor") {
       tt <- tabulate(obj)
       xx <- which(tt > 0 & tt < nfilter)
@@ -220,12 +222,7 @@
     }
     else {
       if (class(obj) == "data.frame" | class(obj) == "matrix") {
-        if (dim(obj)[1] > 0 & dim(obj)[1] < nfilter) {
-          return(FALSE)
-        }
-        else {
-          return(TRUE)
-        }
+        return(all(sapply(obj, .isValidAtomic, nfilter)))
       }
       else {
         return(FALSE)
