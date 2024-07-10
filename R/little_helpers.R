@@ -210,6 +210,15 @@
       class(obj) == "logical" | class(obj) == "numeric") {
     return(.isValidAtomic(obj, nfilter))
   } else {
+    obj <- obj[!is.na(obj)]
+    if (length(obj) > 0 & length(obj) < nfilter) {
+      return(FALSE)
+    }
+    else {
+      return(TRUE)
+    }
+  }
+  else {
     if (class(obj) == "factor") {
       tt <- tabulate(obj)
       xx <- which(tt > 0 & tt < nfilter)
