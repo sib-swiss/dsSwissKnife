@@ -209,17 +209,7 @@
   if (class(obj) == "character" | class(obj) == "integer" |
       class(obj) == "logical" | class(obj) == "numeric") {
     return(.isValidAtomic(obj, nfilter))
-  } else {
-    obj <- obj[!is.na(obj)]
-    if (length(obj) > 0 & length(obj) < nfilter) {
-      return(FALSE)
-    }
-    else {
-      return(TRUE)
-    }
-  }
-  else {
-    if (class(obj) == "factor") {
+  }  else if (class(obj) == "factor") {
       tt <- tabulate(obj)
       xx <- which(tt > 0 & tt < nfilter)
       if (length(xx) > 0) {
@@ -228,16 +218,13 @@
       else {
         return(TRUE)
       }
-    }
-    else {
-      if (class(obj) == "data.frame" | class(obj) == "matrix") {
+    } else if (class(obj) == "data.frame" | class(obj) == "matrix") {
         return(all(sapply(obj, .isValidAtomic, nfilter)))
       }
       else {
         return(FALSE)
-      }
     }
-  }
+
 }
 
 .dsBase_setFilterDSS <- function (x = getOption("datashield.privacyLevel", default = 5)) {
