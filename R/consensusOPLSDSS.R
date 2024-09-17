@@ -13,7 +13,7 @@ consensusOPLSDSS <- function(arglist){
   # out$call <- NULL
  #out$optimal <- out$optimal[c('modelCV', 'VIP')]
  #out$permuted <- lapply(out$permuted, function(x) x[c('modelCV', 'VIP')])
- out@cv <- out@cv[c('AllYhat', 'Q2Yhat', 'cvTestIndex','DQ2Yhat')]
+ out@cv <- out@cv[c('AllYhat', 'Q2Yhat', 'cvTestIndex','DQ2Yhat', 'nOcompOpt')]
  out@response = character()
  return(out)
 }
