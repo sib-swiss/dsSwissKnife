@@ -36,7 +36,7 @@ selfUpgrade <- function(other.package = NULL ,method = NULL, lib = NULL, extra =
         #                                                  repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN',  'https://sophia-fdb.vital-it.ch:8443/CRAN-DS'),
         #                                                  method = method),type = c('message'))
           x[[other.package]] <- capture.output(install.packages(other.package, lib = lib,
-                                                                repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN',  'https://sophia-fdb.vital-it.ch:8443/CRAN-DS'),
+                                                                repos=c('https://sophia-fdb.vital-it.ch/SIB-R',  'https://sophia-fdb.vital-it.ch/CRAN', "https://sophia-fdb.vital-it.ch:8443/SIB-R", 'https://sophia-fdb.vital-it.ch:8443/CRAN', 'https://sophia-fdb.vital-it.ch/CRAN-DS',  'https://sophia-fdb.vital-it.ch:8443/CRAN-DS'),
                                                                 method = method), type = 'message')
     }
     if('BiocManager' %in% other.package){
