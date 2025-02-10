@@ -11,7 +11,7 @@ uploadDSS <- function(name, payload, is.first =  TRUE, is.last = TRUE, spec.obj 
   actual <- paste0(prev, payload)
   if(is.last){
     assign(name, .decode.arg(actual), envir = myenv)
-    if(spec.obj == 'uwot_model'){
+    if(!is.null(spec.obj) && spec.obj == 'uwot_model'){
       fname <- tempfile()
       writeBin(get(name, envir = myenv), fname)
       assign(name, uwot::load_uwot(fname), envir = myenv)
