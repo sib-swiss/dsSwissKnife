@@ -4,7 +4,7 @@ joinDSS <- function(what, type='full', bycol = NULL){
   bycol <- .decode.arg(bycol)
   if(is.null(bycol)){
     tryCatch(bycol <- get('by.col', envir = .mycache), error = function(e){stop('Run init first')})
-  } else {
+  } else if(class(bycol) != "dplyr_join_by") {
     bycol <- unlist(bycol)
   }
   where <- parent.frame()
