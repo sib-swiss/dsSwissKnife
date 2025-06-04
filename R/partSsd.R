@@ -1,6 +1,6 @@
 # sum of squared distances (for a saner calculation of global variance):
 partSsd <- function (xvect, xpoint ) {
-  xect <- xvect[!is.na(xvect)]
+  xvect <- xvect[!is.na(xvect)]
   # if no xpoint we use the local mean
   xpoint <- .decode.arg(xpoint)
   if(is.null(xpoint) || length(xpoint) == 0){
