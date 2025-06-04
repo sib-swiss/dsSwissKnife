@@ -15,7 +15,9 @@ consensusOPLSDSS <- function(arglist){
  #out$permuted <- lapply(out$permuted, function(x) x[c('modelCV', 'VIP')])
  out@cv <- out@cv[c('AllYhat', 'Q2Yhat', 'cvTestIndex','DQ2Yhat', 'nOcompOpt')]
  out@response = character()
- out@model <- NULL
+
+ out@model <- list()
+
  return(out)
 }
 
