@@ -12,7 +12,7 @@
 #'
 
 
-partCov <- function(x, means = NULL,  collist = NULL, wt = NULL, cor = FALSE, center = TRUE, method = 'unbiased'){
+partCov <- function(x, means = NULL,  collist = NULL, na.rm = FALSE, wt = NULL, cor = FALSE, center = TRUE, method = 'unbiased'){
 
 
   # returns a matrix of
@@ -38,12 +38,12 @@ partCov <- function(x, means = NULL,  collist = NULL, wt = NULL, cor = FALSE, ce
     stop("'x' must be a matrix or a data frame",call. = FALSE)
   }
   # no NAs
-  if(anyNA(z)){
-    stop("'x' cannot contain NAs", call. = FALSE)
-  }
+ # if(anyNA(z)){
+#    stop("'x' cannot contain NAs", call. = FALSE)
+#  }
   # must be datashield valid (more than <datashield.privacyLevel> rows):
   if(!.dsBase_isValidDSS(x)){
-    stop(paste0('only ', nrow(x), ' rows'))
+    stop(paste0('not enough rows'))
   }
 
   # if wt (weights) is not null return cov.wt only on this node
@@ -58,9 +58,14 @@ partCov <- function(x, means = NULL,  collist = NULL, wt = NULL, cor = FALSE, ce
 
 means <- .decode.arg(means)
 
-  if(is.null(means) | length(means) == 0){
+  if(is.null(means) || length(means) == 0){
     # no global means, we return the local term
-    means <- colMeans(z)
+    # means <- colMeans(z, na.rm = na.rm)
+    u <- 'everything'
+    if(na.rm){
+      u <- 'pairwise.complete.obs'
+    }
+    return(cov(z, use = u))
   }
 
   if (length(means) != ncol(z)){

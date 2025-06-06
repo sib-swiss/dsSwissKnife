@@ -21,7 +21,7 @@ deriveColumn <- function(x, colname, formula ){
   funcs <-  parsetree[parsetree$token == 'SYMBOL_FUNCTION_CALL', 'text']
   if(length(funcs) >0 ){
     allowed.funcs <- get('allowed.funcs', envir = .mycache)
-    culprits <- setdiff(funcs, c(allowed.funcs, 'egfr', 'one.versus.others', 'rnorm.0.1', 'mergeConceptIds')) # allow these 4 by default
+    culprits <- setdiff(funcs, c(allowed.funcs, 'egfr', 'one.versus.others', 'rnorm.0.1', 'mergeConceptIds', 'nuke.outliers')) # allow these 5 by default
     if(length(culprits) > 0){
       # some illegal functions in there
       stop(paste(culprits, collapse=', '), ' not allowed here. For a list of allowed functions see the documentation.')
@@ -142,3 +142,7 @@ if(length(tot) != length(unique(tot))){
   p
 }
 
+nuke.outliers <- function(col, maxval = Inf, minval = -Inf){
+  col[col > maxval | col < minval ] <- NA
+  return(col)
+}
