@@ -1,7 +1,14 @@
-removeOutliersDSS <- function(symbol, collist = NULL, sigmas = NULL, maxval = Inf, minval = -Inf){
+removeOutliersDSS <- function(symbol, collist = NULL, sigmas = NULL, maxval = NULL, minval = NULL){
+ if(is.null(maxval)){
+   maxval <- Inf
+ }
+ if(is.null(minval)){
+   minval <- -Inf
+ }
 
+ num <-.split.numerics(symbol)$numerics
  if(is.null(collist)){
-   collist <- colnames(symbol)
+   collist <- colnames(num)
  }
   n_cols <- length(collist)
   if (length(minval) == 1) {
@@ -11,12 +18,12 @@ removeOutliersDSS <- function(symbol, collist = NULL, sigmas = NULL, maxval = In
   if (length(maxval) == 1) {
     maxval <- rep(maxval, n_cols)
   }
-  num <-.split.numerics(symbol)$numerics
- names(minval) <- names(maxval) <- colnames(num)
 
- as.data.frame(sapply(collist, function(x){
+ names(minval) <- names(maxval) <- collist
+
+ as.data.frame(sapply(colnames(symbol), function(x){
    this.col <- symbol[[x]]
-   if(!is.numeric(this.col)){
+   if(!(x %in% collist)){
      return(this.col)
    }
    if(!is.null(sigmas)){
