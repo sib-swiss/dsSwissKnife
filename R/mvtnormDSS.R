@@ -1,4 +1,4 @@
-mvtnormDSS <- function(func, arglist){
+mvtnormDSS <- function(func, arglist, newobj = NULL){
   myenv <- parent.frame()
   force(myenv)
   dispatcher <- list(
@@ -10,7 +10,10 @@ mvtnormDSS <- function(func, arglist){
                                   tryCatch(.betterExtract(x, myenv), error = function(e)x)
                                  }
                                 }, simplify = FALSE)
-      do.call(mvtnorm::dmvnorm,a)
+      out <- do.call(mvtnorm::dmvnorm,a)
+      if(!is.null(newobj)){
+        assign(newobj, out, envir = myenv)
+      }
     }
   )
   func <- .decode.arg(func)
